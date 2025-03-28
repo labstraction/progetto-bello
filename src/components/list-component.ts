@@ -9,6 +9,7 @@ import TodoService from '../services/todo-service';
 import CardComponent from './card-component';
 
 export default class ListComponent extends HTMLElement{
+    queryParams: URLSearchParams = new URLSearchParams(window.location.search);
     todoService: TodoService;
     constructor(){
         super();
@@ -18,6 +19,7 @@ export default class ListComponent extends HTMLElement{
 
     connectedCallback(){
         this.styling()
+        this.parseNewTodo()
         this.render()
     }
 
@@ -33,7 +35,7 @@ export default class ListComponent extends HTMLElement{
         this.shadowRoot!.appendChild(style);
     }
 
-    async render(){
+    render(){
         let mainDiv = this.shadowRoot!.getElementById('list-container');
         if (mainDiv) {
             mainDiv.innerHTML = '';
@@ -44,7 +46,6 @@ export default class ListComponent extends HTMLElement{
         mainDiv.classList.add('list-container');
 
         const todos = this.todoService.todos;
-        debugger;
         todos.forEach(() => {
             const cardDiv = document.createElement('a');
             cardDiv.classList.add('card-container');
@@ -56,6 +57,14 @@ export default class ListComponent extends HTMLElement{
         });
 
         this.shadowRoot!.appendChild(mainDiv);
+    }
+
+    parseNewTodo(){
+        if(this.queryParams.get('newTodo')){
+            const newTodo: string = this.queryParams.get('newTodo')!;
+            const todo = JSON.parse(newTodo);
+            this.todoService.addTodos(todo);
+        }
     }
 }
 
