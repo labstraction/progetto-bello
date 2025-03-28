@@ -1,7 +1,8 @@
 //hugo/eusebio
 //mostrerà il testo del todo,la priorità (la priorità indicata è quella del task a meno che il task non sia nel giorno di scadenza, in quel caso diventa rosso) 
 //e quanto manca alla scadenza (numero più grandezza secondi/minuti/ore/giorni - se il todo è scaduto viene scritto scaduto)
-//conterrà un tasto che completa il todo e manda un evento chiamato 'refresh' che invia l'id del todo
+//conterrà un tasto che completa il todo e manda un evento chiamato 'todos-done' che invia l'id del todo
+// avrà un attributo che si chiamerò todos
 
 
 export default class CardComponent extends HTMLElement{
