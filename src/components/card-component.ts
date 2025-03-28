@@ -38,25 +38,25 @@ export default class CardComponent extends HTMLElement {
     const timeDifference = this.todos.terminationDate - Date.now()
     if (timeDifference < 0) return // add later a message to return because todo is expired
 
-    const timeAvailableInSeconds = timeDifference / 1000
-    const timeAvailableInDays = timeAvailableInSeconds / (60 * 60 * 24) 
+    const remainingTimeInSeconds = timeDifference / 1000
+    const timeAvailableInDays = remainingTimeInSeconds / (60 * 60 * 24) 
     if (timeAvailableInDays >= 1) {
         this.timeLabel = 'day(s)'
         return Math.round(timeAvailableInDays)
     }
-    const timeAvailableInHours = timeAvailableInSeconds / (60 * 60) 
+    const timeAvailableInHours = remainingTimeInSeconds / (60 * 60) 
     if (timeAvailableInHours >= 1) {
         this.timeLabel = 'hour(s)'
         return Math.round(timeAvailableInHours)
     }
 
-    const timeAvailableInMinuets = timeAvailableInSeconds / 60  
+    const timeAvailableInMinuets = remainingTimeInSeconds / 60  
     if (timeAvailableInMinuets >= 1) {
         this.timeLabel = 'minutes(s)'
         return Math.round(timeAvailableInMinuets)
     }
     this.timeLabel = 'seconds(s)'
-    return Math.round(timeAvailableInSeconds)
+    return Math.round(remainingTimeInSeconds)
   }
 
   render() {
