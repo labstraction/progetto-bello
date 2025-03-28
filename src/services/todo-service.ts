@@ -67,13 +67,10 @@ export default class TodoService {
         return this.todos;
     }
 
-    addMotus(todo: Todos){
+    addTodos(todo: Todos){
         this.todos.push(todo);
         this.todos = this.orderTodosByPriority(this.todos)
-        this.saveTodos()
+        this.saveTodos();
         return this.todos;
     }
-
-
-
 }
