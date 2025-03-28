@@ -1,4 +1,8 @@
-
+//sara/lorenzo
+// conterrà una lista di card component
+// arriverà da un servizio chiamato TodoService
+// ascolterà l'evento change order chiamerà una funzione del servizio che cambia l'ordine dei todo e refresherà la lista
+// controllerà i query params dell'url, se tra i query params c'è la key 'newTodo' parserà il json ad essa associato e chiamerà il servizio aggiungendo il nuovo todo
 
 export default class ListComponent extends HTMLElement{
 

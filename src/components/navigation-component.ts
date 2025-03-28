@@ -1,8 +1,11 @@
-
+// giovanni/jan
+// conterrà:
+// icona->link che riporta alla home
+// nome app
+// tasto per ordinare i todo -> priorità / scadenza (appare solo in home e manda al componente lista un evento chiamato change-order)
+// tasto aggiungi che manda alla pagina new 
 
 export default class NavigationComponent extends HTMLElement{
-
-
 
     constructor(){
         super();
