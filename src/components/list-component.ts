@@ -5,13 +5,15 @@
 // controllerà i query params dell'url, se tra i query params c'è la key 'newTodo' parserà il json ad essa associato e chiamerà il servizio aggiungendo il nuovo todo
 // ascolterà l'evento todos-done e chiama una funzione del service che mette a done il todo.
 
+import TodoService from '../services/todo-service';
+import CardComponent from './card-component';
+
 export default class ListComponent extends HTMLElement{
-
-
-
+    todoService: TodoService;
     constructor(){
         super();
         this.attachShadow({mode: 'open'});
+        this.todoService = new TodoService();
     }
 
     connectedCallback(){
@@ -22,13 +24,16 @@ export default class ListComponent extends HTMLElement{
     styling(){
         const style = document.createElement('style');
         style.innerText = `
-
+            .list-container {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
         `
         this.shadowRoot!.appendChild(style);
     }
 
-    render(){
-
+    async render(){
         let mainDiv = this.shadowRoot!.getElementById('list-container');
         if (mainDiv) {
             mainDiv.innerHTML = '';
@@ -36,14 +41,22 @@ export default class ListComponent extends HTMLElement{
             mainDiv = document.createElement('div');
             mainDiv.id = 'list-container';
         }
+        mainDiv.classList.add('list-container');
 
-        mainDiv.innerHTML = 'sono la lista'
+        const todos = this.todoService.todos;
+        debugger;
+        todos.forEach(() => {
+            const cardDiv = document.createElement('a');
+            cardDiv.classList.add('card-container');
+            cardDiv.href = '#/todoID';
+            const card = new CardComponent();
+            cardDiv.appendChild(card);
+
+            mainDiv.appendChild(cardDiv);
+        });
 
         this.shadowRoot!.appendChild(mainDiv);
     }
-
-
 }
 
-
-customElements.define('list-component', ListComponent)
+customElements.define('list-component', ListComponent);
