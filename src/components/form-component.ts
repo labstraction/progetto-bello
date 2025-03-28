@@ -6,21 +6,21 @@
 // se premo il tasto cancella-> rimando l'applicazione alla home
 // se premo il tasto ok -> ritorno alla home con un query param chiamato newTodo
 
-export default class FormComponent extends HTMLElement{
+export default class FormComponent extends HTMLElement {
 
 
 
-    constructor(){
+    constructor() {
         super();
-        this.attachShadow({mode: 'open'});
+        this.attachShadow({ mode: 'open' });
     }
 
-    connectedCallback(){
+    connectedCallback() {
         this.styling()
         this.render()
     }
 
-    styling(){
+    styling() {
         const style = document.createElement('style');
         style.innerText = `
 
@@ -28,7 +28,7 @@ export default class FormComponent extends HTMLElement{
         this.shadowRoot!.appendChild(style);
     }
 
-    render(){
+    render() {
 
         let mainDiv = this.shadowRoot!.getElementById('form-container');
         if (mainDiv) {
@@ -38,7 +38,29 @@ export default class FormComponent extends HTMLElement{
             mainDiv.id = 'form-container';
         }
 
-        mainDiv.innerHTML = 'sono la form'
+        mainDiv.innerHTML = `
+      <form id="form">
+    <label for="description">insert task</label>
+    <textarea name="description" id="description">what's your task?</textarea>
+
+    <label for="green">0</label>
+    <input type="radio" name="priorityValue" id="green" value="0" required>
+
+    <label for="yellow">1</label>
+    <input type="radio" name="priorityValue" id="yellow" value="1" required>
+
+    <label for="orange">2</label>
+    <input type="radio" name="priorityValue" id="orange" value="2" required>
+
+    <label for="red">3</label>
+    <input type="radio" name="priorityValue" id="red" value="3" required>
+
+    <input type="checkbox" name="" id="">
+
+    <button id="cancel">cancel</button>
+    <button id="confirm">confirm</button>
+  </form>
+        `
 
         this.shadowRoot!.appendChild(mainDiv);
     }
