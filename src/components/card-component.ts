@@ -1,55 +1,77 @@
 //hugo/eusebio
-//mostrerà il testo del todo,la priorità (la priorità indicata è quella del task a meno che il task non sia nel giorno di scadenza, in quel caso diventa rosso) 
+//mostrerà il testo del todo,la priorità (la priorità indicata è quella del task a meno che il task non sia nel giorno di scadenza, in quel caso diventa rosso)
 //e quanto manca alla scadenza (numero più grandezza secondi/minuti/ore/giorni - se il todo è scaduto viene scritto scaduto)
 //conterrà un tasto che completa il todo e manda un evento chiamato 'todos-done' che invia l'id del todo
 // avrà un attributo che si chiamerò todos
-import TodoService from "../services/todo-service"; 
+import Todos from "../model/todo";
+import TodoService from "../services/todo-service";
 
-export default class CardComponent extends HTMLElement{
+export default class CardComponent extends HTMLElement {
+  private service = new TodoService();
+  private timeLabel!: string
 
-    private service = new TodoService()
-    
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
 
-    constructor(){
-        super();
-        this.attachShadow({mode: 'open'});
+  connectedCallback() {
+    this.styling();
+    this.render();
+  }
+
+  styling() {
+    const style = document.createElement("style");
+    style.innerText = `
+
+        `;
+    this.shadowRoot!.appendChild(style);
+  }
+
+  get todos(): Todos {
+    return JSON.parse(this.getAttribute("todos")!);
+  }
+
+    getRemainingTime() {
+    if (!this.todos.terminationDate) return // add later a message to return
+    // calculate remaining time in milliseconds 
+    const timeDifference = this.todos.terminationDate - Date.now()
+    if (timeDifference < 0) return // add later a message to return because todo is expired
+
+    const timeAvailableInSeconds = timeDifference / 1000
+    const timeAvailableInDays = timeAvailableInSeconds / (60 * 60 * 24) 
+    if (timeAvailableInDays >= 1) {
+        this.timeLabel = 'day(s)'
+        return Math.round(timeAvailableInDays)
+    }
+    const timeAvailableInHours = timeAvailableInSeconds / (60 * 60) 
+    if (timeAvailableInHours >= 1) {
+        this.timeLabel = 'hour(s)'
+        return Math.round(timeAvailableInHours)
     }
 
-    connectedCallback(){
-        this.styling()
-        this.render()
+    const timeAvailableInMinuets = timeAvailableInSeconds / 60  
+    if (timeAvailableInMinuets >= 1) {
+        this.timeLabel = 'minutes(s)'
+        return Math.round(timeAvailableInMinuets)
+    }
+    this.timeLabel = 'seconds(s)'
+    return Math.round(timeAvailableInSeconds)
+  }
+
+  render() {
+    let mainDiv = this.shadowRoot!.getElementById("card-container");
+    if (mainDiv) {
+      mainDiv.innerHTML = "";
+    } else {
+      mainDiv = document.createElement("div");
+      mainDiv.id = "card-container";
     }
 
-    styling(){
-        const style = document.createElement('style');
-        style.innerText = `
+    mainDiv.innerHTML = "sono la card";
 
-        `
-        this.shadowRoot!.appendChild(style);
-    }
-
-    get todos() {
-        return JSON.parse(this.getAttribute('todos')!)
-      }
-
-
-    render(){
-
-        let mainDiv = this.shadowRoot!.getElementById('card-container');
-        if (mainDiv) {
-            mainDiv.innerHTML = '';
-        } else {
-            mainDiv = document.createElement('div');
-            mainDiv.id = 'card-container';
-        }
-
-        mainDiv.innerHTML = 'sono la card'
-
-        this.shadowRoot!.appendChild(mainDiv);
-    }
-
-
+    this.shadowRoot!.appendChild(mainDiv);
+  }
 }
 
-
-customElements.define('card-component', CardComponent)
+customElements.define("card-component", CardComponent);
