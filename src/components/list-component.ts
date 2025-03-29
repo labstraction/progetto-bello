@@ -11,6 +11,7 @@ import CardComponent from './card-component';
 export default class ListComponent extends HTMLElement{
     queryParams: URLSearchParams = new URLSearchParams(window.location.search);
     todoService: TodoService;
+
     constructor(){
         super();
         this.attachShadow({mode: 'open'});
@@ -18,9 +19,10 @@ export default class ListComponent extends HTMLElement{
     }
 
     connectedCallback(){
-        this.styling()
-        this.parseNewTodo()
-        this.render()
+        this.styling();
+        this.parseNewTodo();
+        this.render();
+		this.eventListener(); // chiamo anche eventListener
     }
 
     styling(){
@@ -46,18 +48,34 @@ export default class ListComponent extends HTMLElement{
         mainDiv.classList.add('list-container');
 
         const todos = this.todoService.todos;
-        todos.forEach(() => {
+
+        todos.forEach((todo) => {
             const cardDiv = document.createElement('a');
             cardDiv.classList.add('card-container');
-            cardDiv.href = '#/todoID';
-            const card = new CardComponent();
-            cardDiv.appendChild(card);
+            cardDiv.href = `#/todo/${todo.id}`; //assegna link id di todo con interpolata
 
+            const card = new CardComponent();
+			//passa todo come attributo
+			card.setAttribute('todos', JSON.stringify(todo));
+            cardDiv.appendChild(card);
             mainDiv.appendChild(cardDiv);
         });
 
         this.shadowRoot!.appendChild(mainDiv);
     }
+
+	eventListener(){ // gestisce changeOrder e makeTodosDone
+		document.addEventListener('change-order', () => {
+			this.todoService.changeOrder();
+			this.render();
+		});
+
+		document.addEventListener('todos-done', (event: any) => {
+			const todoId = event.detail;
+			this.todoService.makeTodosDone(todoId);
+			this.render();
+		});
+	}
 
     parseNewTodo(){
         if(this.queryParams.get('newTodo')){
