@@ -94,7 +94,8 @@ export default class NavigationComponent extends HTMLElement{
             padding: 2px;
             position:fixed;
             top:80%;
-            left:46%;
+            left:50%;
+            margin-left: -65px;
         }
 
         .add-button-newTask:hover{
@@ -114,10 +115,10 @@ export default class NavigationComponent extends HTMLElement{
             height: 55px;
         }
 
-        @media (max-width: 768px) {
-            .add-button-newTask {
-            left: 32%;
-        }
+        // @media (max-width: 768px) {
+        //     .add-button-newTask {
+        //     left: 32%;
+        // }
 }
 
         
