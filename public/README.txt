@@ -1,3 +1,7 @@
+FIGMA
+https://www.figma.com/design/0YISMvbwvGoqThVLtRSw5n/todolist?node-id=25-185&m=dev&t=1MibvP8E6KgI2vuK-1
+
+
 FONT
 https://fonts.google.com/specimen/DM+Sans
 
