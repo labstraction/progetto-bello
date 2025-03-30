@@ -22,6 +22,26 @@ export default class CardComponent extends HTMLElement {
     this.render();
   }
 
+
+  get priorityColor() {
+    const priority = this.todos.priority
+    switch (priority) {
+      case 3:
+        return '#ff6666'
+      case 2:
+        return '#f4c06f'
+      case 1:
+        return '#8ddf46'
+      case 0:
+        return '#00d6c6'
+      default:
+        return '#ff6666'
+    }
+      
+
+    return 
+  }
+
   styling() {
     const style = document.createElement("style");
     style.innerText = `
@@ -53,7 +73,7 @@ export default class CardComponent extends HTMLElement {
       .time-span {
         padding: 0.5rem 1rem;
         border-radius: 2rem;
-        background-color: red;
+        background-color: ${this.priorityColor};
         color: white;
         font-weight: bolder;
       }
@@ -72,17 +92,17 @@ export default class CardComponent extends HTMLElement {
     this.shadowRoot!.appendChild(style);
   }
 
-  get TodoImage() {
+  get todoImage() {
     const priority = this.todos.priority 
 
     switch (priority) {
-      case 0:
-        return veryUrgentClock
-      case 1:
-        return urgentClock
-      case 2:
-        return notUrgentClock
       case 3:
+        return veryUrgentClock
+      case 2:
+        return urgentClock
+      case 1:
+        return notUrgentClock
+      case 0:
         return easyCLock
       default:
         return spoiledClock
@@ -127,20 +147,20 @@ export default class CardComponent extends HTMLElement {
       mainDiv.id = "card-container";
     }
 
-    // const {label, value} = this.getRemainingTime()
+    const {label, value} = this.getRemainingTime()
 
     mainDiv.innerHTML = `
       <div class="task-container">
         <div class="task-txt-info">
           <h3 class="task-title">task title mockup</h3>
-          <p class="task-summary">task info</p>
+          <p class="task-summary">${this.todos.description}</p>
         </div>
         <div class="task-icon-info">
           <div class="clock-icon-container">
-            <img class="clock-img" src="" alt="">
+            <img class="clock-img" src=${this.todoImage} alt="">
           </div>
           <div class="task-time-container">
-            <time class="time-span" datetime="">1 hour </time>
+            <time class="time-span" datetime="">${value} ${label}</time>
           </div>
         </div>
       </div>
