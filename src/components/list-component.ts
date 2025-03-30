@@ -28,12 +28,22 @@ export default class ListComponent extends HTMLElement{
     styling(){
         const style = document.createElement('style');
         style.innerText = `
-            .list-container {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-        `
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			text-decoration: none;
+			font-family: 'DM Sans', sans-serif;
+		}
+
+		.list-container {
+			display: flex;
+			flex-direction: column;
+			gap: 1.5rem;
+			padding: 1.5rem;
+			background-color: #f9f9f9;
+		}
+		`
         this.shadowRoot!.appendChild(style);
     }
 
