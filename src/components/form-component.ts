@@ -27,6 +27,7 @@ export default class FormComponent extends HTMLElement {
     styling() {
         const style = document.createElement('style');
         style.innerText = `
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Signika+Negative:wght@300..700&display=swap');
         :host {
             --priority-3: #ff6666; /* Rosso acceso */
             --priority-2: #f4c06f; /* Arancio chiaro */
@@ -35,60 +36,101 @@ export default class FormComponent extends HTMLElement {
         }
 
         #form-container {
-            font-family: Arial, sans-serif;
+            font-family:"Signika Negative", sans-serif;
             padding: 16px;
             border: 1px solid #ccc;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            background-color: #f4f4f4;
             max-width: 400px;
             margin: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
         }
-        label {
-           display: flex;
-            align-items: center;
-            margin-top: 8px;
-        }
-        label img {
-            width: 24px;
-            height: 24px;
-            margin-right: 8px;
+        
+        h3 {
+            font-family: "Signika Negative", sans-serif; 
+            font-weight: 300; 
+            text-align: center;
+            color: #222; 
+            font-size: 1rem;
+            margin-bottom: 16px;
         }
 
-        textarea, input, button {
-            margin-top: 4px;
+        .priority-group {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-bottom: 48px;
+            font-size: 0.8rem; 
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        .color-label {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        input[type="radio"]:checked + .color-label {
+            transform: scale(1.2);
+        }
+
+        textarea {
+            height: 100px; 
+            width: 100%;
+            resize: vertical; 
+            padding: 8px, 12px; 
+            font-size: 0.9rem; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            cursor: text;
+            box-sizing: border-box; 
+            margin-bottom: 16px;
+        }
+
+        #terminationDate {
+            width: 100%; 
+            height: 40px; 
+            padding: 8px 12px; 
+            font-size: 0.9rem; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            cursor: text; 
+            background-color: #fff;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between; 
+            gap: 50px; 
+            margin-top: 24px;
+        }
+
+        button {
             display: block;
             width: 100%;
-        }
-        button {
             margin-top: 12px;
             padding: 8px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
         }
-            #cancel {
-            background-color: #f44336;
+
+        #cancel {
+            background-color:#999;
             color: white;
         }
-        #confirm {
-            background-color: #4CAF50;
-            color: white;
             
-        /* Colori delle priorità */
-        input[type="radio"]#green + label {
-            color: var(--priority-0);
-        }
-
-        input[type="radio"]#yellow + label {
-            color: var(--priority-1);
-        }
-
-        input[type="radio"]#orange + label {
-            color: var(--priority-2);
-        }
-
-        input[type="radio"]#red + label {
-            color: var(--priority-3);
+        #confirm {
+            background-color:rgb(10, 21, 10);
+            color: white;
         }
         `
         this.shadowRoot!.appendChild(style);
@@ -104,41 +146,39 @@ export default class FormComponent extends HTMLElement {
             mainDiv.id = 'form-container';
         }
 
+        const now = new Date();
+        // Converti in fuso orario locale
+        const offset = now.getTimezoneOffset();
+        const localDate = new Date(now.getTime() - offset * 60 * 1000);
+        const minDate = localDate.toISOString().slice(0, 16);
         mainDiv.innerHTML = `
         <form id="form">
-            <label for="description">insert task</label>
-            <textarea name="description" id="description" required>what's your task?</textarea>
-
+        <h3>seleziona il grado di priorità</h3>
             <div class="priority-group">
-                <input type="radio" name="priorityValue" id="green" value="0" required>
-                <label for="green">
-                    <img src="/3%20EASY%20-%20clock-twelve-svgrepo-com.svg" alt="Low Priority">
-                    0
-                </label>
-                
-                <input type="radio" name="priorityValue" id="yellow" value="1" required>
-                <label for="yellow">
-                <img src="/2%20NOT%20URGENT%20-%20clock-three-svgrepo-com.svg" alt="Medium Priority">
-                1
-                </label>
-                
-                <input type="radio" name="priorityValue" id="orange" value="2" required>
-                <label for="orange">
-                <img src="/1%20URGENT%20-%20clock-lines-svgrepo-com.svg" alt="High Priority">
-                2
-                </label>
-                
-                <input type="radio" name="priorityValue" id="red" value="3" required>
-                <label for="red">
-                <img src="/0%20VERY%20URGENT%20-%20clock-exclamation-svgrepo-com.svg" alt="Critical Priority">
-                3
-                </label>
-            </div>    
+                            <input type="radio" id="priority-0" name="priorityValue" value="0" required>
+                <label for="priority-0" class="color-label" style="background-color: var(--priority-0);"></label>
 
-                <input type="datetime-local" name="terminationDate" id="terminationDate">
+                <input type="radio" id="priority-1" name="priorityValue" value="1" required>
+                <label for="priority-1" class="color-label" style="background-color: var(--priority-1);"></label>
 
-                <button id="cancel">cancel</button>
-                <button id="confirm">confirm</button>
+                <input type="radio" id="priority-2" name="priorityValue" value="2" required>
+                <label for="priority-2" class="color-label" style="background-color: var(--priority-2);"></label>
+
+                <input type="radio" id="priority-3" name="priorityValue" value="3" required>
+                <label for="priority-3" class="color-label" style="background-color: var(--priority-3);"></label>
+            </div>
+            <div class="description-area">
+            <label for="description"><h3>descrivi qui il tuo task</h3></label>
+            <textarea name="description" id="description" required></textarea>
+            </div>
+            
+            <label for="terminationDate"><h3>entro quando? (facoltativo)</h3></label>
+            <input type="datetime-local" name="terminationDate" id="terminationDate" min="${minDate}" placeholder="termination date">
+
+            <div class="button-container">
+            <button id="cancel">annula</button>
+            <button id="confirm">salva</button>
+            </div>
             
         </form>
         `;
@@ -150,9 +190,6 @@ export default class FormComponent extends HTMLElement {
 
         const confirmBtn = this.shadowRoot!.getElementById("confirm") as HTMLButtonElement
         confirmBtn.addEventListener("click", (e) => this.confirmForm(e))
-
-
-
     }
 
     cancelForm(e: Event) {
