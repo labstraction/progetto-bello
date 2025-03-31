@@ -66,7 +66,7 @@ export default class DetailComponent extends HTMLElement{
                 padding: 0.4rem;
                 height: 2rem;
                 margin-bottom: 1rem;
-                background-color: ${this.getPriorityColor(selectedTodo.priority)};
+               
                 border-radius: 2rem;
                 display: flex;
                 align-items: center;
@@ -75,6 +75,7 @@ export default class DetailComponent extends HTMLElement{
             }
         `
         this.shadowRoot!.appendChild(style);
+        // background-color: ${this.getPriorityColor(selectedTodo.priority)};
     }
 
     render(){
