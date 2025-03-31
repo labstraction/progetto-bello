@@ -44,14 +44,14 @@ export default class FormComponent extends HTMLElement {
             max-width: 400px;
             margin: auto;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    
+
         }
-        
+
         h3 {
-            font-family: "Signika Negative", sans-serif; 
-            font-weight: 300; 
+            font-family: "Signika Negative", sans-serif;
+            font-weight: 300;
             text-align: center;
-            color: #222; 
+            color: #222;
             font-size: 1rem;
             margin-bottom: 16px;
         }
@@ -61,7 +61,7 @@ export default class FormComponent extends HTMLElement {
             justify-content: space-evenly;
             align-items: center;
             margin-bottom: 48px;
-            font-size: 0.8rem; 
+            font-size: 0.8rem;
         }
 
         input[type="radio"] {
@@ -78,38 +78,38 @@ export default class FormComponent extends HTMLElement {
         }
 
         input[type="radio"]:checked + .color-label {
-            transform: scale(1.2);
+            transform: scale(1.5);
         }
 
         textarea {
-            height: 100px; 
+            height: 100px;
             width: 100%;
-            resize: vertical; 
-            padding: 8px, 12px; 
-            font-size: 0.9rem; 
-            border: 1px solid #ccc; 
-            border-radius: 8px; 
+            resize: vertical;
+            padding: 8px, 12px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
             cursor: text;
-            box-sizing: border-box; 
+            box-sizing: border-box;
             margin-bottom: 16px;
         }
 
         #terminationDate {
-            width: 100%; 
-            height: 40px; 
-            padding: 8px 12px; 
-            font-size: 0.9rem; 
-            border: 1px solid #ccc; 
-            border-radius: 8px; 
-            box-sizing: border-box; 
-            cursor: text; 
+            width: 100%;
+            height: 40px;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            cursor: text;
             background-color: #fff;
         }
 
         .button-container {
             display: flex;
-            justify-content: space-between; 
-            gap: 50px; 
+            justify-content: space-between;
+            gap: 50px;
             margin-top: 24px;
         }
 
@@ -127,7 +127,7 @@ export default class FormComponent extends HTMLElement {
             background-color:#999;
             color: white;
         }
-            
+
         #confirm {
             background-color:rgb(10, 21, 10);
             color: white;
@@ -171,7 +171,7 @@ export default class FormComponent extends HTMLElement {
             <label for="description"><h3>descrivi qui il tuo task</h3></label>
             <textarea name="description" id="description" required></textarea>
             </div>
-            
+
             <label for="terminationDate"><h3>entro quando? (facoltativo)</h3></label>
             <input type="datetime-local" name="terminationDate" id="terminationDate" min="${minDate}" placeholder="termination date">
 
@@ -179,7 +179,7 @@ export default class FormComponent extends HTMLElement {
             <button id="cancel">annula</button>
             <button id="confirm">salva</button>
             </div>
-            
+
         </form>
         `;
 
