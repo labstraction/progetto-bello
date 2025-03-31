@@ -43,11 +43,36 @@ export default class ListComponent extends HTMLElement{
 			padding: 0.4rem;
 			background-color: #f9f9f9;
 		}
+        
+        .add-button-newTask{
+            border-radius: 16px;
+            font-size:1.1rem;
+            font-family: "DM Sans", sans-serif;
+            font-weight:500;
+            background-color: black;
+            width: 130px;
+            height: 50px;
+            color: white;
+            padding: 2px;
+            position:fixed;
+            top:80%;
+            left:50%;
+            margin-left: -65px;
+        }
+
+        .add-button-newTask:hover{
+            background-color: rgba(0, 0, 0, 0.84);
+        }
+
+        @media (max-width: 768px) {
+            .add-button-newTask {
+            left: 32%;
+        }
 		`
         this.shadowRoot!.appendChild(style);
     }
 
-    render(){
+    render(hash?: string){
         let mainDiv = this.shadowRoot!.getElementById('list-container');
         if (mainDiv) {
             mainDiv.innerHTML = '';
@@ -70,6 +95,26 @@ export default class ListComponent extends HTMLElement{
             cardDiv.appendChild(card);
             mainDiv.appendChild(cardDiv);
         });
+        
+        const link = document.createElement("a");
+        link.href = "./#/new";
+        const addBtn = document.createElement("button");
+        if (hash === '#/new' || hash === '#/detail') {
+            const addIcon = document.createElement("img");
+            addIcon.src = `../public/plus-button.png`;
+            addBtn.classList.add("add-button-subtask");
+            addBtn.appendChild(addIcon);
+        } else {
+            const AddNode = document.createTextNode("NUOVO TASK");
+            addBtn.appendChild(AddNode);
+            addBtn.classList.add("add-button-newTask");
+        }
+        const AddNode = document.createTextNode("NUOVO TASK");
+        addBtn.appendChild(AddNode);
+        addBtn.classList.add("add-button-newTask");
+
+        link.appendChild(addBtn);
+        mainDiv.appendChild(link);
 
         this.shadowRoot!.appendChild(mainDiv);
     }
