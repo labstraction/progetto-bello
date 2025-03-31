@@ -42,22 +42,33 @@ export default class ListComponent extends HTMLElement{
 			gap: 0.4rem;
 			padding: 0.4rem;
 			background-color: #f9f9f9;
+            min-height: calc(100vh - 60px); /* Spazio per il footer */
+            box-sizing: border-box;
 		}
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #EFEFEF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0;
+            z-index: 1000;
+        }
         
-        .add-button-newTask{
+        .add-button-newTask {
             border-radius: 16px;
-            font-size:1.1rem;
+            font-size: 1.1rem;
             font-family: "DM Sans", sans-serif;
-            font-weight:500;
+            font-weight: 500;
             background-color: black;
             width: 130px;
             height: 50px;
             color: white;
             padding: 2px;
-            position:fixed;
-            top:80%;
-            left:50%;
-            margin-left: -65px;
+            cursor: pointer;
         }
 
         .add-button-newTask:hover{
@@ -95,27 +106,35 @@ export default class ListComponent extends HTMLElement{
             cardDiv.appendChild(card);
             mainDiv.appendChild(cardDiv);
         });
-        
-        const link = document.createElement("a");
-        link.href = "./#/new";
-        const addBtn = document.createElement("button");
-        addBtn.classList.add("add-button-newTask");
-        if (hash === '#/detail') {
-            const AddNode = document.createTextNode("NUOVO SUBTASK");
-            addBtn.appendChild(AddNode);
-        } else {
-            const AddNode = document.createTextNode("NUOVO TASK");
-            addBtn.appendChild(AddNode);
- 
-        }
-        const AddNode = document.createTextNode("NUOVO TASK");
-        addBtn.appendChild(AddNode);
-        addBtn.classList.add("add-button-newTask");
-
-        link.appendChild(addBtn);
-        mainDiv.appendChild(link);
 
         this.shadowRoot!.appendChild(mainDiv);
+
+        //crea il footer
+        let footer = this.shadowRoot!.getElementById('footer');
+        if (!footer) {
+            footer = document.createElement('div');
+            footer.id = 'footer';
+            footer.classList.add('footer');
+    
+            const link = document.createElement('a');
+            link.href = './#/new';
+            const addBtn = document.createElement('button');
+            addBtn.classList.add('add-button-newTask');
+    
+            if (hash === '#/detail') {
+                const AddNode = document.createTextNode('NUOVO SUBTASK');
+                addBtn.appendChild(AddNode);
+            } else {
+                const AddNode = document.createTextNode('NUOVO TASK');
+                addBtn.appendChild(AddNode);
+            }
+    
+            link.appendChild(addBtn);
+            footer.appendChild(link);
+    
+            // Aggiungi il footer al shadow DOM
+            this.shadowRoot!.appendChild(footer);
+        }
     }
 
 	eventListener(){ // gestisce changeOrder e makeTodosDone
