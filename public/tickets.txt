@@ -1,10 +1,10 @@
 - creare pagina dettaglio (lorenzo / jeremias / eusebio)
 
-- creare icona (simil logo) e metterla al suo posto (sara / giovanni)
+- creare icona (simil logo) e metterla al suo posto (sara / giovanni) DONE
 
-- nome applicazione sX (sara / giovanni)
+- nome applicazione sX (sara / giovanni) DONE
 
-- sostituzione icona settings con un sort (sara / giovanni)
+- sostituzione icona settings con un sort (sara / giovanni) DONE
 
 - diminuire margin delle card (laterale e tra loro) (jan / laura) DONE
 
