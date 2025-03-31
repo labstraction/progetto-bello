@@ -49,7 +49,7 @@ export default class CardComponent extends HTMLElement {
         padding: 1.25rem;
         border-radius: 1rem;
         box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.2);
-        margin-bottom: 3rem;
+        margin-bottom: 0.5rem;
         display: grid;
         grid-template-columns: 3fr 3fr;
       }
@@ -160,7 +160,7 @@ export default class CardComponent extends HTMLElement {
             <img class="clock-img" src=${this.todoImage} alt="">
           </div>
           <div class="task-time-container">
-            <time class="time-span" datetime="">${value} ${label}</time>
+            <time class="time-span" datetime="">${value!==0?value:""} ${label}</time>
           </div>
         </div>
       </div>

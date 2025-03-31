@@ -6,19 +6,19 @@
 
 - sostituzione icona settings con un sort (sara / giovanni)
 
-- diminuire margin delle card (laterale e tra loro) (jan / laura)
+- diminuire margin delle card (laterale e tra loro) (jan / laura) DONE
 
 - togliere "task title mockup" e sostituire con description (jan / laura)
 
 - spostare icone orologio dentro la chips con il countdown (jan / laura)
 
-- rimuovere zero quando non c'è scadenza (jan / laura)
+- rimuovere zero quando non c'è scadenza (jan / laura) DONE
 
 - spostare tasto  "nuovo task" nel componente lista e renderlo come barra in fondo all'applicazione (a tutta larghezza) (sara / giovanni)
 
 - aggiustare ordinamento per scadenza (sara / giovanni)
 
-- rimuovere effetto dialog al nuovo task (togliamo ombra, togliere boro, togliere angoli, dare un po' di margine in alto) tasto salva e annulla in fondo (jan / laura)
+- rimuovere effetto dialog al nuovo task (togliamo ombra, togliere bordo, togliere angoli, dare un po' di margine in alto) tasto salva e annulla in fondo (jan / laura) DONE
 
 - nel dettaglio si può aggiungere il subtask (lorenzo / jeremias / eusebio)
 
