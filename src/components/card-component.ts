@@ -51,16 +51,18 @@ export default class CardComponent extends HTMLElement {
         box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.2);
         margin-bottom: 0.5rem;
         display: grid;
-        grid-template-columns: 3fr 3fr;
+        grid-template-columns: 1fr 1fr;
       }
 
-      .task-title {
-        text-transform: capitalize;
+      .task-txt-info{
+        display: flex;
       }
 
       .task-summary {
         color: gray;
         font-weight: bold;
+        display: block;
+        max-width:50%;
       }
 
       .task-icon-info {
@@ -163,11 +165,15 @@ export default class CardComponent extends HTMLElement {
 
     const {label, value} = this.getRemainingTime()
 
+    // const todosTitle = this.todos.description.split(" ", 2);
+    // let todosTitle2 = todosTitle.join(",")
+    // todosTitle2 = todosTitle2.replace(",", " ")
+    // console.log(todosTitle2);
+
     mainDiv.innerHTML = `
       <div class="task-container">
         <div class="task-txt-info">
-          <h3 class="task-title">task title mockup</h3>
-          <p class="task-summary">${this.todos.description}</p>
+          <span class="task-summary">${this.todos.description}</span>
         </div>
         <div class="task-icon-info">
           <div class="done-icon-container">
