@@ -8,7 +8,7 @@
 
 - diminuire margin delle card (laterale e tra loro) (jan / laura) DONE
 
-- togliere "task title mockup" e sostituire con description (jan / laura)
+- togliere "task title mockup" e sostituire con description (jan / laura) DONE
 
 - spostare icone orologio dentro la chips con il countdown (jan / laura) DONE
 
@@ -29,4 +29,4 @@ compiti:
 
 -finire i ticket di stamattina
 -trasformare le pagine 404 in web component
--studiare typescript
+-studiare typescript DONE
