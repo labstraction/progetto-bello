@@ -4,6 +4,7 @@
 //conterrà un tasto che completa il todo e manda un evento chiamato 'todos-done' che invia l'id del todo
 // avrà un attributo che si chiamerò todos
 import Todos from "../model/todo";
+import TodoService from "../services/todo-service";
 import spoiledClock from "/00_SPOILED_clock-xmark-svgrepo-com.svg?url"
 import veryUrgentClock from  "/0_VERY_URGENT_clock-exclamation-svgrepo-com.svg?url"
 import urgentClock from "/1_URGENT_clock-lines-svgrepo-com.svg?url"
@@ -11,10 +12,12 @@ import notUrgentClock from  "/2_NOT_URGENT_clock-three-svgrepo-com.svg?url"
 import easyCLock from "/3_EASY_clock-twelve-svgrepo-com.svg?url"
 
 export default class CardComponent extends HTMLElement {
+  todoService: TodoService;
 
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this.todoService = TodoService.getInstance();
   }
 
   connectedCallback() {
@@ -170,23 +173,35 @@ export default class CardComponent extends HTMLElement {
     // todosTitle2 = todosTitle2.replace(",", " ")
     // console.log(todosTitle2);
 
-    mainDiv.innerHTML = `
-      <div class="task-container">
+      const taskContainer = document.createElement("div");
+      taskContainer.classList.add("task-container");
+      taskContainer.innerHTML = `
         <div class="task-txt-info">
           <span class="task-summary">${this.todos.description}</span>
         </div>
-        <div class="task-icon-info">
-          <div class="done-icon-container">
-            <img class="done-icon" src="../public/check-double-svgrepo-com.svg" alt="done">
-          </div>
+      `
+
+      const taskIconInfo = document.createElement("div");
+      taskIconInfo.classList.add("task-icon-info");
+      taskIconInfo.innerHTML = `
           <div class="task-time-container">
 	          <img class="clock-img" src=${this.todoImage} alt="">
             <time class="time-span" datetime="">${value!==0?value:""} ${label}</time>
           </div>
-        </div>
-      </div>
-    
-    `
+      `
+
+    const doneBtn = document.createElement("button");
+    doneBtn.classList.add("done-icon-container");
+    doneBtn.addEventListener("click", () => this.todoService.makeTodosDone(this.todos.id));
+    const doneIcon = document.createElement("img");
+    doneIcon.src = "../public/check-double-svgrepo-com.svg";
+    doneIcon.alt = "done";
+    doneIcon.classList.add("done-icon");
+
+    doneBtn.appendChild(doneIcon);
+    taskIconInfo.appendChild(doneBtn);
+    taskContainer.appendChild(taskIconInfo);
+    mainDiv.appendChild(taskContainer);
 
     this.shadowRoot!.appendChild(mainDiv);
   }
