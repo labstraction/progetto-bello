@@ -33,6 +33,7 @@ export default class TodoService {
     }
 
     changeOrder() {
+        console.log('Before changeOrder:', this.todos);
         if (this.isPriorityOrder) {
             this.isPriorityOrder = false;
             this.todos = this.orderTodosByTermination(this.todos);
@@ -40,6 +41,7 @@ export default class TodoService {
             this.isPriorityOrder = true;
             this.todos = this.orderTodosByPriority(this.todos)
         }
+        console.log('After changeOrder:', this.todos);
         return this.todos;
     }
 
@@ -52,7 +54,7 @@ export default class TodoService {
                 priority1 = -1
             }
             let priority2 = todo2.priority;
-            if(todo1.isDone){
+            if(todo2.isDone){ // corretto un typo qui ma non funziona ancora
                 priority2= -1
             }
             return priority2 - priority1;
