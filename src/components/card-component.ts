@@ -49,7 +49,7 @@ export default class CardComponent extends HTMLElement {
         padding: 1.25rem;
         border-radius: 1rem;
         box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.2);
-        margin-bottom: 3rem;
+        margin-bottom: 0.5rem;
         display: grid;
         grid-template-columns: 3fr 3fr;
       }
@@ -71,22 +71,34 @@ export default class CardComponent extends HTMLElement {
       }
 
       .time-span {
-        padding: 0.5rem 1rem;
-        border-radius: 2rem;
-        background-color: ${this.priorityColor};
+        // padding: 0.5rem 1rem;
+        // border-radius: 2rem;
+        // background-color: ${this.priorityColor};
         color: white;
         font-weight: bolder;
       }
 
-      .clock-icon-container {
-        width: 2rem;
-        height: 2rem;
-        margin-bottom: 1rem;
-      }
+      // .clock-icon-container {
+      //   width: 2rem;
+      //   height: 2rem;
+      //   margin-bottom: 1rem;
+      // }
 
       .clock-img {
-        width: 100%;
-        height: 100%;
+        // width: 100%;
+        height: 80%;
+        fill: white;
+      }
+
+      .task-time-container{
+        padding: 0.4rem;
+        height: 2rem;
+        margin-bottom: 1rem;
+	      background-color: ${this.priorityColor};
+	      border-radius: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     `;
     this.shadowRoot!.appendChild(style);
@@ -156,11 +168,9 @@ export default class CardComponent extends HTMLElement {
           <p class="task-summary">${this.todos.description}</p>
         </div>
         <div class="task-icon-info">
-          <div class="clock-icon-container">
-            <img class="clock-img" src=${this.todoImage} alt="">
-          </div>
           <div class="task-time-container">
-            <time class="time-span" datetime="">${value} ${label}</time>
+	          <img class="clock-img" src=${this.todoImage} alt="">
+            <time class="time-span" datetime="">${value!==0?value:""} ${label}</time>
           </div>
         </div>
       </div>

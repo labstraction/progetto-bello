@@ -39,8 +39,8 @@ export default class ListComponent extends HTMLElement{
 		.list-container {
 			display: flex;
 			flex-direction: column;
-			gap: 1.5rem;
-			padding: 1.5rem;
+			gap: 0.4rem;
+			padding: 0.4rem;
 			background-color: #f9f9f9;
 		}
 		`
