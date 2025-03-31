@@ -15,7 +15,7 @@ export default class ListComponent extends HTMLElement{
     constructor(){
         super();
         this.attachShadow({mode: 'open'});
-        this.todoService = new TodoService();
+        this.todoService = TodoService.getInstance();
     }
 
     connectedCallback(){

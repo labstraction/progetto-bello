@@ -141,7 +141,7 @@ export default class NavigationComponent extends HTMLElement{
         externalDiv.classList.add("external-nav");
 
         externalDiv.innerHTML = `
-            <a class="home-link" href="./index.html">
+            <a class="home-link" href="./#home">
                 <img class="home-logo" src="../public/home-button.svg" alt="icon-home">
             </a>
             <h1>Tasky Task</h1>
@@ -158,7 +158,7 @@ export default class NavigationComponent extends HTMLElement{
         mainDiv.appendChild(externalDiv);
 
         const link = document.createElement("a");
-        link.href = "./index/#/new";
+        link.href = "./#/new";
         const addBtn = document.createElement("button");
 
         if(hash === '#/new' || hash === '#/detail') {
