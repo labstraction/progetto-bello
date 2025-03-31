@@ -38,3 +38,5 @@ POSSIBILI MIGLIORIE
 - [ ] Modalità scura
 - [ ] Sincronizzazione con localStorage o API
 
+
+

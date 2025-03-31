@@ -82,9 +82,9 @@ export default class FormComponent extends HTMLElement {
         }
 
         textarea {
-            height: 100px;
+            height: 150px;
             width: 100%;
-            resize: vertical;
+            resize: none;
             padding: 8px, 12px;
             font-size: 0.9rem;
             border: 1px solid #ccc;
@@ -155,7 +155,7 @@ export default class FormComponent extends HTMLElement {
         <form id="form">
         <h3>seleziona il grado di priorità</h3>
             <div class="priority-group">
-                            <input type="radio" id="priority-0" name="priorityValue" value="0" required>
+                <input type="radio" id="priority-0" name="priorityValue" value="0" checked required>
                 <label for="priority-0" class="color-label" style="background-color: var(--priority-0);"></label>
 
                 <input type="radio" id="priority-1" name="priorityValue" value="1" required>
