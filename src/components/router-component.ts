@@ -12,11 +12,10 @@ export default class RouterComponent extends HTMLElement{
     connectedCallback(){
         window.addEventListener("hashchange", () => {
             console.log('hash changed', window.location.hash)
-            //this.render(window.location.hash)
+            this.render(window.location.hash)
         });
-        console.log('hash changed', window.location.hash)
-        // this.render(window.location.hash)
-        // this.styling()
+        this.render(window.location.hash)
+        this.styling()
     }
 
     styling(){
