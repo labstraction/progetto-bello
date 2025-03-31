@@ -72,21 +72,11 @@ export default class CardComponent extends HTMLElement {
       }
 
       .time-span {
-        // padding: 0.5rem 1rem;
-        // border-radius: 2rem;
-        // background-color: ${this.priorityColor};
         color: white;
         font-weight: bolder;
       }
 
-      // .clock-icon-container {
-      //   width: 2rem;
-      //   height: 2rem;
-      //   margin-bottom: 1rem;
-      // }
-
       .clock-img {
-        // width: 100%;
         height: 100%;
         fill: white;
       }
@@ -94,7 +84,6 @@ export default class CardComponent extends HTMLElement {
       .task-time-container{
         padding: 0.4rem;
         height: 2rem;
-        // min-width:44.8px;
         margin-bottom: 1rem;
 	      background-color: ${this.priorityColor};
 	      border-radius: 2rem;
@@ -182,7 +171,7 @@ export default class CardComponent extends HTMLElement {
         </div>
         <div class="task-icon-info">
           <div class="done-icon-container">
-            <img class="done-icon" src="../public/circle-check-svgrepo-com.svg" alt="done">
+            <img class="done-icon" src="../public/check-double-svgrepo-com.svg" alt="done">
           </div>
           <div class="task-time-container">
 	          <img class="clock-img" src=${this.todoImage} alt="">
