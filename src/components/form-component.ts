@@ -82,9 +82,9 @@ export default class FormComponent extends HTMLElement {
         }
 
         textarea {
-            height: 100px;
+            height: 150px;
             width: 100%;
-            resize: vertical;
+            resize: none;
             padding: 8px, 12px;
             font-size: 0.9rem;
             border: 1px solid #ccc;
