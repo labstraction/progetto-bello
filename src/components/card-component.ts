@@ -54,7 +54,7 @@ export default class CardComponent extends HTMLElement {
         box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.2);
         margin-bottom: 0.5rem;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 3fr 2fr;
       }
 
       .task-txt-info{
@@ -65,7 +65,7 @@ export default class CardComponent extends HTMLElement {
         color: gray;
         font-weight: bold;
         display: block;
-        max-width:50%;
+        max-width:100%;
       }
 
       .task-icon-info {
@@ -98,11 +98,16 @@ export default class CardComponent extends HTMLElement {
         box-sizing: border-box;
       }
 
-      .done-icon-container{
+      .done-icon-container {
         width: 2rem;
         height: 2rem;
         background-color: transparent;
         border: none;
+      }
+
+      .done-icon-container.done {
+        background-color: green;
+        border-radius: 50%;
       }
 
       .done-icon{
@@ -194,7 +199,10 @@ export default class CardComponent extends HTMLElement {
 
     const doneBtn = document.createElement("button");
     doneBtn.classList.add("done-icon-container");
-    doneBtn.addEventListener("click", () => this.todoService.makeTodosDone(this.todos.id));
+    if (this.todos.isDone) {
+      doneBtn.classList.add("done");
+    }
+    doneBtn.addEventListener("click", (event) => this.todoService.makeTodosDone(event, this.todos.id));
     const doneIcon = document.createElement("img");
     doneIcon.src = "../public/check-double-svgrepo-com.svg";
     doneIcon.alt = "done";
