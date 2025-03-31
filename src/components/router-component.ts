@@ -12,10 +12,11 @@ export default class RouterComponent extends HTMLElement{
     connectedCallback(){
         window.addEventListener("hashchange", () => {
             console.log('hash changed', window.location.hash)
-            this.render(window.location.hash)
+            //this.render(window.location.hash)
         });
-        this.render(window.location.hash)
-        this.styling()
+        console.log('hash changed', window.location.hash)
+        // this.render(window.location.hash)
+        // this.styling()
     }
 
     styling(){
@@ -44,13 +45,13 @@ export default class RouterComponent extends HTMLElement{
 
 
 
-        if(hash === '#/detail'){
+        if(hash?.includes('#/detail')){
             mainDiv.innerHTML = `
                 <navigation-component></navigation-component>
                 <detail-component></detail-component>
                 <list-component></list-component>
             `
-        } else if(hash === '#/new'){
+        } else if(hash?.includes('#/new')){
             mainDiv.innerHTML = `
                 <navigation-component></navigation-component>
                 <form-component></form-component>
