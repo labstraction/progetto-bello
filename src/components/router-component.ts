@@ -48,6 +48,7 @@ export default class RouterComponent extends HTMLElement{
             mainDiv.innerHTML = `
                 <navigation-component></navigation-component>
                 <detail-component></detail-component>
+                <list-component></list-component>
             `
         } else if(hash?.includes('#/new')){
             mainDiv.innerHTML = `

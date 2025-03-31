@@ -22,6 +22,19 @@ export default class DetailComponent extends HTMLElement{
                 bottom: 0;
                 text-align: center;
             }
+
+            .task-detail {
+                padding: 1.25rem;
+                border-radius: 1rem;
+                box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.2);
+                margin-bottom: 0.5rem;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .task-description {
+                text-transform: capitalize;
+            }
         `
         this.shadowRoot!.appendChild(style);
     }
@@ -36,9 +49,12 @@ export default class DetailComponent extends HTMLElement{
             mainDiv.id = 'detail-container';
         }
         
+        // const urlParams = new URLSearchParams(window.location.toString().split("?")[1]);
+        // console.log(urlParams);
+
         //ricaviamo id da hash params
-        const haskLink = window.location.hash;
-        const todoId = haskLink.replace("#/detail?id=", "");
+        const hashLink = window.location.hash;
+        const todoId = hashLink.replace("#/detail?id=", "");
 
         const service = TodoService.getInstance();
         const selectedTodo: Todos = service.findTodosRec(service.todos, todoId) as Todos;
@@ -51,24 +67,30 @@ export default class DetailComponent extends HTMLElement{
 
         mainDiv.innerHTML = `
             <div class="task-detail">
-                <span class="task-description">
+                <div style="width:100%">
+                     <span class="task-description">
                     ${selectedTodo.description}
-                </span>
-                <div class="task-priority">
-                    ${selectedTodo.priority}
+                    </span>
                 </div>
-                <div class="task-dates">
-                    <span>${creationDateString}</span>
-                    <span>${terminationDateString}</span>
+
+                <div style="width:100%; display: flex; flex-direction: row; align-items: flex-end;">
+                    <div class="task-priority">
+                        ${selectedTodo.priority}
+                    </div>
+                    <div style="width: 100%; display: flex; flex-direction: column;">
+                        <span>${creationDateString}</span>
+                        <span>${terminationDateString}</span>
+                    </div>
                 </div>
             </div>
-            <div>
-                <!-- list component -->
-            </div>
-            <div class="add-subtask">
-                <button class="add-btn" id="add-btn">+</button>
-            </div>
+            
+            
         `;
+        // <div class="add-subtask">
+        //         <button class="add-btn" id="add-btn">+</button>
+        //  </div>
+        //
+        //button per nuovo subTask, modificare form-component, passara id di task
 
         this.shadowRoot!.appendChild(mainDiv);
     }
