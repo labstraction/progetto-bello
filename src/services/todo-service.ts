@@ -33,16 +33,17 @@ export default class TodoService {
     }
 
     changeOrder() {
-        console.log('Before changeOrder:', this.todos);
-        if (this.isPriorityOrder) {
+		console.log('isPriorityOrder:', this.isPriorityOrder);
+		console.log('Before changeOrder:', this.todos);
+		if (this.isPriorityOrder) {
             this.isPriorityOrder = false;
             this.todos = this.orderTodosByTermination(this.todos);
         } else {
-            this.isPriorityOrder = true;
+            this.isPriorityOrder = true; //trovato il problema: siccome le card vengono sempre impostate in ordine di priorità, questo sarà sempre true e dunque sort non funzionerà
             this.todos = this.orderTodosByPriority(this.todos)
         }
         console.log('After changeOrder:', this.todos);
-        return this.todos;
+        return [...this.todos]; //clono l'array così lo restituisce cambiato
     }
 
     orderTodosByPriority(todos: Todos[]): Todos[] {
@@ -54,9 +55,10 @@ export default class TodoService {
                 priority1 = -1
             }
             let priority2 = todo2.priority;
-            if(todo2.isDone){ // corretto un typo qui ma non funziona ancora
+            if(todo2.isDone){ //typo qui, ma non era quello il problems
                 priority2= -1
             }
+			console.log(`Comparing ${priority1} and ${priority2}`);
             return priority2 - priority1;
         })
 

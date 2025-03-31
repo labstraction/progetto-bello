@@ -47,13 +47,19 @@ export default class NavigationComponent extends HTMLElement{
         .external-nav{
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: space-between;
             width: 100%;
             height: 100%;
             padding: 16px 32px;
             box-sizing: border-box;
             gap: 8px;
         }
+
+		.home-title-group {
+			display: flex;
+			align-items: center;
+			gap: 12px; /* Spazio tra icona e testo */
+		}
 
         h1{
             font-family: "DM Sans", sans-serif;
@@ -85,6 +91,12 @@ export default class NavigationComponent extends HTMLElement{
         img:hover{
             height: 44px;
         }
+
+		@media (min-width: 1000px) {
+        	.external-nav {
+            	padding: 16px 500px;
+        	}
+    	}	
     }
     `
         this.shadowRoot!.appendChild(style);
@@ -105,10 +117,12 @@ export default class NavigationComponent extends HTMLElement{
         externalDiv.classList.add("external-nav");
 
         externalDiv.innerHTML = `
+		<div class="home-title-group">
             <a class="home-link" href="./#home">
                 <img class="home-logo" src="../public/LOGO_home_button.png" alt="icon-home">
             </a>
             <h1>Tasky Task</h1>
+		</div>
         `;
 
         const orderBtn = document.createElement("button");
@@ -120,24 +134,6 @@ export default class NavigationComponent extends HTMLElement{
         orderBtn.addEventListener("click", () => this.dispatchChangeOrder());
         externalDiv.appendChild(orderBtn);
         mainDiv.appendChild(externalDiv);
-
-        // const link = document.createElement("a");
-        // link.href = "./#/new";
-        // const addBtn = document.createElement("button");
-        
-        // if(hash === '#/new' || hash === '#/detail') {
-        //     const addIcon = document.createElement("img");
-        //     addIcon.src = `../public/plus-button.png`;
-        //     addBtn.classList.add("add-button-subtask");
-        //     addBtn.appendChild(addIcon);
-        // } else {
-        //     const AddNode = document.createTextNode("NUOVO TASK");
-        //     addBtn.appendChild(AddNode);
-        //     addBtn.classList.add("add-button-newTask");
-        // }
-        
-        // link.appendChild(addBtn);
-        // mainDiv.appendChild(link);
 
         this.shadowRoot!.appendChild(mainDiv);
     }
