@@ -23,3 +23,10 @@
 - nel dettaglio si può aggiungere il subtask (lorenzo / jeremias / eusebio)
 
 - aggiungere check completamento sulla card (in home) e implementare logiche di completamento (jan / laura)
+
+
+compiti:
+
+-finire i ticket di stamattina
+-trasformare le pagine 404 in web component
+-studiare typescript
