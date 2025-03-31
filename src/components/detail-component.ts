@@ -1,5 +1,10 @@
 import TodoService from "../services/todo-service";
 import Todos from "../model/todo";
+import spoiledClock from "/00_SPOILED_clock-xmark-svgrepo-com.svg?url"
+import veryUrgentClock from  "/0_VERY_URGENT_clock-exclamation-svgrepo-com.svg?url"
+import urgentClock from "/1_URGENT_clock-lines-svgrepo-com.svg?url"
+import notUrgentClock from  "/2_NOT_URGENT_clock-three-svgrepo-com.svg?url"
+import easyCLock from "/3_EASY_clock-twelve-svgrepo-com.svg?url"
 
 export default class DetailComponent extends HTMLElement{
 
@@ -12,6 +17,22 @@ export default class DetailComponent extends HTMLElement{
         this.styling()
         this.render()
     }
+
+    getTodoImage(priority: number) {
+    
+        switch (priority) {
+          case 3:
+            return veryUrgentClock
+          case 2:
+            return urgentClock
+          case 1:
+            return notUrgentClock
+          case 0:
+            return easyCLock
+          default:
+            return spoiledClock
+        }
+      }
 
     styling(){
         const style = document.createElement('style');
@@ -34,6 +55,23 @@ export default class DetailComponent extends HTMLElement{
 
             .task-description {
                 text-transform: capitalize;
+            }
+
+            .clock-img {
+                height: 100%;
+                fill: white;
+            }
+
+            .task-priority{
+                padding: 0.4rem;
+                height: 2rem;
+                margin-bottom: 1rem;
+                background-color: ${this.getPriorityColor(selectedTodo.priority)};
+                border-radius: 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-sizing: border-box;
             }
         `
         this.shadowRoot!.appendChild(style);
@@ -75,7 +113,7 @@ export default class DetailComponent extends HTMLElement{
 
                 <div style="width:100%; display: flex; flex-direction: row; align-items: flex-end;">
                     <div class="task-priority">
-                        ${selectedTodo.priority}
+                        <img class="clock-img" src="${this.getTodoImage(selectedTodo.priority)}" alt="">
                     </div>
                     <div style="width: 100%; display: flex; flex-direction: column;">
                         <span>${creationDateString}</span>
