@@ -39,8 +39,8 @@ export default class ListComponent extends HTMLElement{
 		.list-container {
 			display: flex;
 			flex-direction: column;
-			gap: 1.5rem;
-			padding: 1.5rem;
+			gap: 0.4rem;
+			padding: 0.4rem;
 			background-color: #f9f9f9;
 		}
 		`
@@ -62,7 +62,7 @@ export default class ListComponent extends HTMLElement{
         todos.forEach((todo) => {
             const cardDiv = document.createElement('a');
             cardDiv.classList.add('card-container');
-            cardDiv.href = `#/todo/${todo.id}`; //assegna link id di todo con interpolata
+            cardDiv.href = `#/detail?id=${todo.id}`; //assegna link id di todo con interpolata
 
             const card = new CardComponent();
 			//passa todo come attributo
