@@ -8,8 +8,20 @@ import easyCLock from "/3_EASY_clock-twelve-svgrepo-com.svg?url"
 
 export default class DetailComponent extends HTMLElement{
 
+    selectedTodo: Todos;
+
     constructor(){
         super();
+
+        // const urlParams = new URLSearchParams(window.location.toString().split("?")[1]);
+        // console.log(urlParams);
+        //ricaviamo id da hash params
+        const hashLink = window.location.hash;
+        const todoId = hashLink.replace("#/detail?id=", "");
+
+        const service = TodoService.getInstance();
+        this.selectedTodo = service.findTodosRec(service.todos, todoId) as Todos;
+
         this.attachShadow({mode: 'open'});
     }
 
@@ -18,25 +30,48 @@ export default class DetailComponent extends HTMLElement{
         this.render()
     }
 
-    getTodoImage(priority: number) {
-    
+    get todoImage() {
+        const priority = this.selectedTodo.priority
         switch (priority) {
-          case 3:
-            return veryUrgentClock
-          case 2:
-            return urgentClock
-          case 1:
-            return notUrgentClock
-          case 0:
-            return easyCLock
-          default:
-            return spoiledClock
+            case 3:
+                return veryUrgentClock
+            case 2:
+                return urgentClock
+            case 1:
+                return notUrgentClock
+            case 0:
+                return easyCLock
+            default:
+                return spoiledClock
         }
-      }
+    }
+
+    get priorityColor() {
+        const priority = this.selectedTodo.priority
+        switch (priority) {
+            case 3:
+                return '#ff6666'
+            case 2:
+                return '#f4c06f'
+            case 1:
+                return '#8ddf46'
+            case 0:
+                return '#00d6c6'
+            default:
+                return '#ff6666'
+        }
+    }
 
     styling(){
         const style = document.createElement('style');
         style.innerText = `
+            @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Signika+Negative:wght@300..700&display=swap');
+
+            #detail-container{
+                font-family:"Signika Negative", sans-serif;
+                text-transform: capitalize;
+            }
+
             .add-subtask{
                 width: 100%;
                 position: absolute;
@@ -45,16 +80,33 @@ export default class DetailComponent extends HTMLElement{
             }
 
             .task-detail {
-                padding: 1.25rem;
+                height: auto;
+                min-height: 100px;
                 border-radius: 1rem;
+                margin: 10px;
+                padding: 1rem;
                 box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.2);
-                margin-bottom: 0.5rem;
-                display: flex;
-                flex-direction: column;
+                display:grid;
+                grid-template-rows: 3fr 2fr;
             }
 
             .task-description {
-                text-transform: capitalize;
+                font-size: large;
+            }
+
+            .task-priority-date{
+                min-height: 50px;
+                max-height: 50px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .task-priority{
+                padding: 0.4rem;
+                background-color: ${this.priorityColor};
+                border-radius: 2rem;
+                box-sizing: border-box;
+                height: 100%;
             }
 
             .clock-img {
@@ -62,20 +114,14 @@ export default class DetailComponent extends HTMLElement{
                 fill: white;
             }
 
-            .task-priority{
-                padding: 0.4rem;
-                height: 2rem;
-                margin-bottom: 1rem;
-               
-                border-radius: 2rem;
+            .task-date{
                 display: flex;
-                align-items: center;
+                flex-direction: column;
                 justify-content: center;
-                box-sizing: border-box;
+                font-size: smaller;
             }
         `
         this.shadowRoot!.appendChild(style);
-        // background-color: ${this.getPriorityColor(selectedTodo.priority)};
     }
 
     render(){
@@ -87,38 +133,28 @@ export default class DetailComponent extends HTMLElement{
             mainDiv = document.createElement('div');
             mainDiv.id = 'detail-container';
         }
-        
-        // const urlParams = new URLSearchParams(window.location.toString().split("?")[1]);
-        // console.log(urlParams);
 
-        //ricaviamo id da hash params
-        const hashLink = window.location.hash;
-        const todoId = hashLink.replace("#/detail?id=", "");
-
-        const service = TodoService.getInstance();
-        const selectedTodo: Todos = service.findTodosRec(service.todos, todoId) as Todos;
-
-        const creationDateString = new Date(selectedTodo.creationDate).toLocaleString();
+        const creationDateString = new Date(this.selectedTodo.creationDate).toLocaleString();
         let terminationDateString = "";
-        if(selectedTodo.terminationDate){
-            terminationDateString = new Date(selectedTodo.terminationDate).toLocaleString();
+        if(this.selectedTodo.terminationDate){
+            terminationDateString = new Date(this.selectedTodo.terminationDate).toLocaleString();
         }
 
         mainDiv.innerHTML = `
             <div class="task-detail">
-                <div style="width:100%">
+                <div class="task-description">
                      <span class="task-description">
-                    ${selectedTodo.description}
+                    ${this.selectedTodo.description}
                     </span>
                 </div>
 
-                <div style="width:100%; display: flex; flex-direction: row; align-items: flex-end;">
+                <div class="task-priority-date">
                     <div class="task-priority">
-                        <img class="clock-img" src="${this.getTodoImage(selectedTodo.priority)}" alt="">
+                        <img class="clock-img" src="${this.todoImage}" alt="">
                     </div>
-                    <div style="width: 100%; display: flex; flex-direction: column;">
-                        <span>${creationDateString}</span>
-                        <span>${terminationDateString}</span>
+                    <div class="task-date">
+                        <span>creation date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${creationDateString.slice(0,17)}</span>
+                        <span>expiration date:&nbsp;&nbsp;${terminationDateString.slice(0,17)}</span>
                     </div>
                 </div>
             </div>
