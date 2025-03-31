@@ -68,25 +68,16 @@ export default class CardComponent extends HTMLElement {
         flex-direction: column;
         align-items: end;
         justify-content: end;
+        gap: 0.6rem;
       }
 
       .time-span {
-        // padding: 0.5rem 1rem;
-        // border-radius: 2rem;
-        // background-color: ${this.priorityColor};
         color: white;
         font-weight: bolder;
       }
 
-      // .clock-icon-container {
-      //   width: 2rem;
-      //   height: 2rem;
-      //   margin-bottom: 1rem;
-      // }
-
       .clock-img {
-        // width: 100%;
-        height: 80%;
+        height: 100%;
         fill: white;
       }
 
@@ -99,6 +90,17 @@ export default class CardComponent extends HTMLElement {
         display: flex;
         align-items: center;
         justify-content: center;
+        box-sizing: border-box;
+      }
+
+      .done-icon-container{
+        width: 2rem;
+        height: 2rem;
+      }
+
+      .done-icon{
+        width: 100%;
+        height: 100%;
       }
     `;
     this.shadowRoot!.appendChild(style);
@@ -168,6 +170,9 @@ export default class CardComponent extends HTMLElement {
           <p class="task-summary">${this.todos.description}</p>
         </div>
         <div class="task-icon-info">
+          <div class="done-icon-container">
+            <img class="done-icon" src="../public/check-double-svgrepo-com.svg" alt="done">
+          </div>
           <div class="task-time-container">
 	          <img class="clock-img" src=${this.todoImage} alt="">
             <time class="time-span" datetime="">${value!==0?value:""} ${label}</time>
