@@ -26,6 +26,7 @@ export default class NavigationComponent extends HTMLElement{
             font-optical-sizing: auto;
             font-weight: 900;
             font-style: normal;
+            text-align: left;
         }
         
         *{
@@ -45,16 +46,18 @@ export default class NavigationComponent extends HTMLElement{
 
         .external-nav{
             display: flex;
-            justify-content: space-between;
-            width: 410px;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
             height: 100%;
             padding: 16px 32px;
             box-sizing: border-box;
+            gap: 8px;
         }
 
         h1{
             font-family: "DM Sans", sans-serif;
-            font-size: 2rem;
+            font-size: 1.5rem;
             display: inline;
             padding: 0px;
             margin: 0px;
@@ -66,20 +69,21 @@ export default class NavigationComponent extends HTMLElement{
             align-items: center;
         }
 
-        .order-button {
+        .order-button{
+            margin-left: auto;
             background-color: transparent;
             border: none;
             box-sizing: border-box;
             width:24px;
-            padding:0px
+            padding-right: 30px;
         }
 
         img{
-            height: 24px;
+            height: 40px;
         }
 
         img:hover{
-            height: 28px;
+            height: 44px;
         }
 
         .add-button-newTask{
@@ -142,7 +146,7 @@ export default class NavigationComponent extends HTMLElement{
 
         externalDiv.innerHTML = `
             <a class="home-link" href="./#home">
-                <img class="home-logo" src="../public/home-button.svg" alt="icon-home">
+                <img class="home-logo" src="../public/LOGO_home_button.png" alt="icon-home">
             </a>
             <h1>Tasky Task</h1>
         `;
@@ -151,7 +155,7 @@ export default class NavigationComponent extends HTMLElement{
         const orderIcon = document.createElement("img");
         orderBtn.classList.add("order-button");
         orderIcon.classList.add("order-img");
-        orderIcon.src = "../public/sorting-button.png";
+        orderIcon.src = "../public/sorting-button.svg";
         orderBtn.appendChild(orderIcon);
         orderBtn.addEventListener("click", () => this.dispatchChangeOrder());
         externalDiv.appendChild(orderBtn);
