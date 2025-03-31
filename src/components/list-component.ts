@@ -99,15 +99,14 @@ export default class ListComponent extends HTMLElement{
         const link = document.createElement("a");
         link.href = "./#/new";
         const addBtn = document.createElement("button");
-        if (hash === '#/new' || hash === '#/detail') {
-            const addIcon = document.createElement("img");
-            addIcon.src = `../public/plus-button.png`;
-            addBtn.classList.add("add-button-subtask");
-            addBtn.appendChild(addIcon);
+        addBtn.classList.add("add-button-newTask");
+        if (hash === '#/detail') {
+            const AddNode = document.createTextNode("NUOVO SUBTASK");
+            addBtn.appendChild(AddNode);
         } else {
             const AddNode = document.createTextNode("NUOVO TASK");
             addBtn.appendChild(AddNode);
-            addBtn.classList.add("add-button-newTask");
+ 
         }
         const AddNode = document.createTextNode("NUOVO TASK");
         addBtn.appendChild(AddNode);
