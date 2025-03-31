@@ -19,7 +19,7 @@ export default class ErrorPageComponent extends HTMLElement {
                 font-family: 'Arial', sans-serif;
             }
 
-            body {
+            .main-container {
                 background-color: #2c3e50;
                 display: flex;
                 justify-content: center;
@@ -99,6 +99,7 @@ export default class ErrorPageComponent extends HTMLElement {
             mainDiv = document.createElement('div');
             mainDiv.id = 'app';
         }
+        mainDiv.classList.add("main-container");
         mainDiv.innerHTML = `
             <div class="container">
                 <div class="error-message">
