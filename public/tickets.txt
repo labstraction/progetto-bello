@@ -1,0 +1,25 @@
+- creare pagina dettaglio
+
+- creare icona (simil logo) 
+
+- nome applicazione sin
+
+- sostituzione icona settings con un sort
+
+- diminuire margin delle card (laterale e tra loro)
+
+- togliere "task title mockup" e sostituire con description
+
+- spostare icone orologio dentro la chips con il countdown
+
+- rimuovere zero quando non c'è scadenza
+
+- spostare tasto "nuovo task" come barra in fondo all'applicazione (a tutta larghezza)
+
+- aggiustare ordinamento per scadenza
+
+- rimuovere effetto dialog al nuovo task (togliamo ombra, togliere boro, togliere angoli, dare un po' di margine in alto) tasto salva e annulla in fondo
+
+- nel dettaglio si può aggiungere il subtask
+
+- aggiungere check completamento sulla card (in home) e implementare logiche di completamento
