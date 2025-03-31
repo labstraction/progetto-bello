@@ -102,6 +102,7 @@ export default class TodoService {
         if (this.isPriorityOrder) {
             this.todos = this.orderTodosByPriority(this.todos);
         }
+        console.log(todo);
         this.saveTodos();
     }
 

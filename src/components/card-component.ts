@@ -101,7 +101,7 @@ export default class CardComponent extends HTMLElement {
       .done-icon-container{
         width: 2rem;
         height: 2rem;
-        background-color: trsansparent;
+        background-color: transparent;
         border: none;
       }
 
