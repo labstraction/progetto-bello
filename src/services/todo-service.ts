@@ -3,6 +3,8 @@ import Todos from "../model/todo";
 
 export default class TodoService {
 
+    static instance: TodoService;
+
     todos: Todos[];
     isPriorityOrder: Boolean;
 
@@ -15,6 +17,17 @@ export default class TodoService {
         if (todosString) {
             const loadedTodos = JSON.parse(todosString);
             this.todos = this.orderTodosByPriority(loadedTodos);
+        }
+    }
+
+    static getInstance(){
+
+        if(TodoService.instance){
+            return TodoService.instance;
+        } else {
+            const newInstance = new TodoService();
+            TodoService.instance = newInstance;
+            return TodoService.instance;
         }
 
     }
@@ -42,7 +55,7 @@ export default class TodoService {
             if(todo1.isDone){
                 priority2= -1
             }
-            return priority1 - priority2;
+            return priority2 - priority1;
         })
 
         return newArray;
@@ -80,15 +93,44 @@ export default class TodoService {
     }
 
     makeTodosDone(id: string) {
-        const todo = this.todos.find(todo => todo.id === id);
+        const todo = this.findTodosRec(this.todos, id);
         if (todo) {
             todo.isDone = true;
-        } {
-            if (this.isPriorityOrder) {
-                this.todos = this.orderTodosByPriority(this.todos)
+        } 
+        if (this.isPriorityOrder) {
+            this.todos = this.orderTodosByPriority(this.todos);
+        }
+        this.saveTodos();
+    }
+
+    addSubTodos(todosId: string, newTodo:Todos){
+        const selectedTodos = this.findTodosRec(this.todos, todosId);
+        if (selectedTodos) {
+            if (!selectedTodos.subTodosArray) {
+                selectedTodos.subTodosArray = []
             }
+            selectedTodos.subTodosArray.push(newTodo);
+            this.orderTodosByPriority(selectedTodos.subTodosArray)
             this.saveTodos()
         }
+    }
+
+    findTodosRec(todosArray: Todos[], todosId: string): Todos | null{
+        for (let i = 0; i < todosArray.length; i++) {
+            const todos = todosArray[i];
+
+            if(todosId === todos.id){
+                return todos;
+            } else {
+                if(todos.subTodosArray && todos.subTodosArray.length > 0){
+                    const sub =  this.findTodosRec(todos.subTodosArray, todosId)
+                    if (sub) {
+                        return sub;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
 }

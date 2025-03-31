@@ -1,25 +1,25 @@
-- creare pagina dettaglio
+- creare pagina dettaglio (lorenzo / jeremias / eusebio)
 
-- creare icona (simil logo) 
+- creare icona (simil logo) e metterla al suo posto (sara / giovanni)
 
-- nome applicazione sin
+- nome applicazione sX (sara / giovanni)
 
-- sostituzione icona settings con un sort
+- sostituzione icona settings con un sort (sara / giovanni)
 
-- diminuire margin delle card (laterale e tra loro)
+- diminuire margin delle card (laterale e tra loro) (jan / laura)
 
-- togliere "task title mockup" e sostituire con description
+- togliere "task title mockup" e sostituire con description (jan / laura)
 
-- spostare icone orologio dentro la chips con il countdown
+- spostare icone orologio dentro la chips con il countdown (jan / laura)
 
-- rimuovere zero quando non c'è scadenza
+- rimuovere zero quando non c'è scadenza (jan / laura)
 
-- spostare tasto "nuovo task" come barra in fondo all'applicazione (a tutta larghezza)
+- spostare tasto  "nuovo task" nel componente lista e renderlo come barra in fondo all'applicazione (a tutta larghezza) (sara / giovanni)
 
-- aggiustare ordinamento per scadenza
+- aggiustare ordinamento per scadenza (sara / giovanni)
 
-- rimuovere effetto dialog al nuovo task (togliamo ombra, togliere boro, togliere angoli, dare un po' di margine in alto) tasto salva e annulla in fondo
+- rimuovere effetto dialog al nuovo task (togliamo ombra, togliere boro, togliere angoli, dare un po' di margine in alto) tasto salva e annulla in fondo (jan / laura)
 
-- nel dettaglio si può aggiungere il subtask
+- nel dettaglio si può aggiungere il subtask (lorenzo / jeremias / eusebio)
 
-- aggiungere check completamento sulla card (in home) e implementare logiche di completamento
+- aggiungere check completamento sulla card (in home) e implementare logiche di completamento (jan / laura)

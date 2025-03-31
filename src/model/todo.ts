@@ -13,6 +13,7 @@ export default interface Todos {
     description: string,
     creationDate: number,
     isDone: boolean,
-    terminationDate?: number
+    terminationDate?: number,
+    subTodosArray?: Todos[]
 }
   

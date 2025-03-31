@@ -16,7 +16,7 @@ export default class FormComponent extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        this.service = new TodoService();
+        this.service = TodoService.getInstance();
     }
 
     connectedCallback() {
