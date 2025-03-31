@@ -6,9 +6,9 @@
 import Todos from "../model/todo";
 import TodoService from "../services/todo-service";
 import spoiledClock from "/00_SPOILED_clock-xmark-svgrepo-com.svg?url"
-import veryUrgentClock from  "/0_VERY_URGENT_clock-exclamation-svgrepo-com.svg?url"
+import veryUrgentClock from "/0_VERY_URGENT_clock-exclamation-svgrepo-com.svg?url"
 import urgentClock from "/1_URGENT_clock-lines-svgrepo-com.svg?url"
-import notUrgentClock from  "/2_NOT_URGENT_clock-three-svgrepo-com.svg?url"
+import notUrgentClock from "/2_NOT_URGENT_clock-three-svgrepo-com.svg?url"
 import easyCLock from "/3_EASY_clock-twelve-svgrepo-com.svg?url"
 
 export default class CardComponent extends HTMLElement {
@@ -40,9 +40,9 @@ export default class CardComponent extends HTMLElement {
       default:
         return '#ff6666'
     }
-      
 
-    return 
+
+    return
   }
 
   styling() {
@@ -101,6 +101,8 @@ export default class CardComponent extends HTMLElement {
       .done-icon-container{
         width: 2rem;
         height: 2rem;
+        background-color: trsansparent;
+        border: none;
       }
 
       .done-icon{
@@ -112,7 +114,7 @@ export default class CardComponent extends HTMLElement {
   }
 
   get todoImage() {
-    const priority = this.todos.priority 
+    const priority = this.todos.priority
 
     switch (priority) {
       case 3:
@@ -133,28 +135,28 @@ export default class CardComponent extends HTMLElement {
   }
 
   getRemainingTime() {
-    if (!this.todos.terminationDate) return {label: '', value:0}
+    if (!this.todos.terminationDate) return { label: '', value: 0 }
     // calculate remaining time in milliseconds 
     const timeDifference = this.todos.terminationDate - Date.now()
-    if (timeDifference < 0) return {label: '', value: 0}
+    if (timeDifference < 0) return { label: '', value: 0 }
 
     const remainingTimeInSeconds = timeDifference / 1000
-    const timeAvailableInDays = remainingTimeInSeconds / (60 * 60 * 24) 
+    const timeAvailableInDays = remainingTimeInSeconds / (60 * 60 * 24)
 
     if (timeAvailableInDays >= 1) {
-        return {label: 'day(s)', value: Math.round(timeAvailableInDays)}
+      return { label: 'day(s)', value: Math.round(timeAvailableInDays) }
     }
-    const timeAvailableInHours = remainingTimeInSeconds / (60 * 60) 
+    const timeAvailableInHours = remainingTimeInSeconds / (60 * 60)
     if (timeAvailableInHours >= 1) {
-        return {label: 'hour(s)', value: Math.round(timeAvailableInHours)}
+      return { label: 'hour(s)', value: Math.round(timeAvailableInHours) }
     }
 
-    const timeAvailableInMinuets = remainingTimeInSeconds / 60  
+    const timeAvailableInMinuets = remainingTimeInSeconds / 60
     if (timeAvailableInMinuets >= 1) {
-      return {label: 'minute(s)', value: Math.round(timeAvailableInMinuets)}
+      return { label: 'minute(s)', value: Math.round(timeAvailableInMinuets) }
     }
 
-    return {label: 'second(s)', value: Math.round(remainingTimeInSeconds)}
+    return { label: 'second(s)', value: Math.round(remainingTimeInSeconds) }
   }
 
   render() {
@@ -166,27 +168,27 @@ export default class CardComponent extends HTMLElement {
       mainDiv.id = "card-container";
     }
 
-    const {label, value} = this.getRemainingTime()
+    const { label, value } = this.getRemainingTime()
 
     // const todosTitle = this.todos.description.split(" ", 2);
     // let todosTitle2 = todosTitle.join(",")
     // todosTitle2 = todosTitle2.replace(",", " ")
     // console.log(todosTitle2);
 
-      const taskContainer = document.createElement("div");
-      taskContainer.classList.add("task-container");
-      taskContainer.innerHTML = `
+    const taskContainer = document.createElement("div");
+    taskContainer.classList.add("task-container");
+    taskContainer.innerHTML = `
         <div class="task-txt-info">
           <span class="task-summary">${this.todos.description}</span>
         </div>
       `
 
-      const taskIconInfo = document.createElement("div");
-      taskIconInfo.classList.add("task-icon-info");
-      taskIconInfo.innerHTML = `
+    const taskIconInfo = document.createElement("div");
+    taskIconInfo.classList.add("task-icon-info");
+    taskIconInfo.innerHTML = `
           <div class="task-time-container">
 	          <img class="clock-img" src=${this.todoImage} alt="">
-            <time class="time-span" datetime="">${value!==0?value:""} ${label}</time>
+            <time class="time-span" datetime="">${value !== 0 ? value : ""} ${label}</time>
           </div>
       `
 
@@ -207,7 +209,7 @@ export default class CardComponent extends HTMLElement {
   }
 
   dispatchCompleteTaskEvent() {
-    const completeEvent = new CustomEvent('todos-done', {detail: this.todos.id})
+    const completeEvent = new CustomEvent('todos-done', { detail: this.todos.id })
     document.dispatchEvent(completeEvent)
   }
 }
