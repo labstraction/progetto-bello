@@ -34,16 +34,19 @@ export default class FormComponent extends HTMLElement {
             --priority-1: #8ddf46; /* Verde lime */
             --priority-0: #00d6c6; /* Turchese brillante */
         }
+        body{
+            background-color: #f4f4f4;
+        }
 
         #form-container {
             font-family:"Signika Negative", sans-serif;
             padding: 16px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background-color: #f4f4f4;
-            max-width: 400px;
+            /* border: 1px solid #ccc; */
+           /*  border-radius: 8px; */
+            
+          max-width: 400px; 
             margin: auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+           /*  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
 
         }
 
