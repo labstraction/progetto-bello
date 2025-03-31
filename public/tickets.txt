@@ -10,11 +10,11 @@
 
 - togliere "task title mockup" e sostituire con description (jan / laura)
 
-- spostare icone orologio dentro la chips con il countdown (jan / laura)
+- spostare icone orologio dentro la chips con il countdown (jan / laura) DONE
 
 - rimuovere zero quando non c'è scadenza (jan / laura) DONE
 
-- spostare tasto  "nuovo task" nel componente lista e renderlo come barra in fondo all'applicazione (a tutta larghezza) (sara / giovanni)
+- spostare tasto "nuovo task" nel componente lista e renderlo come barra in fondo all'applicazione (a tutta larghezza) (sara / giovanni)
 
 - aggiustare ordinamento per scadenza (sara / giovanni)
 
