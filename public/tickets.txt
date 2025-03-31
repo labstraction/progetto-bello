@@ -14,7 +14,7 @@
 
 - rimuovere zero quando non c'è scadenza (jan / laura) DONE
 
-- spostare tasto  "nuovo task" nel componente lista e renderlo come barra in fondo all'applicazione (a tutta larghezza) (sara / giovanni)
+- spostare tasto "nuovo task" nel componente lista e renderlo come barra in fondo all'applicazione (a tutta larghezza) (sara / giovanni)
 
 - aggiustare ordinamento per scadenza (sara / giovanni)
 
