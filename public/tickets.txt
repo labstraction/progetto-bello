@@ -4,7 +4,7 @@
 
 -DONE aggiustare ordinamento per scadenza (andrea)
 
-- nuovo task: tasto salva e annulla in fondo mantenere un sfondo di stacco dal bianco (jan/hugo)
+-DONE nuovo task: tasto salva e annulla in fondo mantenere un sfondo di stacco dal bianco (jan/hugo)
 
 -DONE nel dettaglio si può aggiungere il subtask (lorenzo/eusebio/jeremias)
 
