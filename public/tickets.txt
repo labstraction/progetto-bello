@@ -16,7 +16,7 @@
 
 - implementare flusso di creazione del subtodo (jan/hugo) passiamo l'id del task nell'url del newsubtask quando siamo nel detail
 
-- riorganizzare card todo e testo max 3 lines (fanciulle)
+-DONE riorganizzare card todo e testo max 3 lines (fanciulle)
 
 -DONE description è required (jan/hugo)
 
