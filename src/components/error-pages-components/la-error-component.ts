@@ -67,7 +67,7 @@ export default class ErrorPageComponentLa extends HTMLElement {
                 <p>Oops! Pagina non trovata.</p>
                 <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnNjaGpueG5qaW1paDVvZDNoMG9zcW9mN2xhdGNmZzgwamU1aWwyNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jcxtvm2bsZDH2/giphy.gif"
                     alt="Funny 404 GIF">
-                <a href="/">Torna alla home</a>
+                <a href="#/home">Torna alla home</a>
             </div>
         `;
         this.shadowRoot!.appendChild(mainDiv);
