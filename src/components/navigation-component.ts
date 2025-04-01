@@ -50,7 +50,7 @@ export default class NavigationComponent extends HTMLElement{
             justify-content: space-between;
             width: 100%;
             height: 100%;
-            padding: 16px 32px;
+            padding: 16px;
             box-sizing: border-box;
             gap: 8px;
         }
@@ -58,7 +58,6 @@ export default class NavigationComponent extends HTMLElement{
 		.home-title-group {
 			display: flex;
 			align-items: center;
-			gap: 12px; /* Spazio tra icona e testo */
 		}
 
         h1{
@@ -71,8 +70,10 @@ export default class NavigationComponent extends HTMLElement{
 
         .home-link{
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: left;
+            align-items: left;
+            margin-left: -10px;
+            margin-right: 20px;
         }
 
         .order-button{
@@ -91,12 +92,6 @@ export default class NavigationComponent extends HTMLElement{
         img:hover{
             height: 44px;
         }
-
-		@media (min-width: 1000px) {
-        	.external-nav {
-            	padding: 16px 500px;
-        	}
-    	}	
     }
     `
         this.shadowRoot!.appendChild(style);
@@ -119,7 +114,7 @@ export default class NavigationComponent extends HTMLElement{
         externalDiv.innerHTML = `
 		<div class="home-title-group">
             <a class="home-link" href="./#/home">
-                <img class="home-logo" src="../public/LOGO_home_button.png" alt="icon-home">
+                <img class="home-logo" src="../LOGO_home_button.png" alt="icon-home">
             </a>
             <h1>Tasky Task</h1>
 		</div>

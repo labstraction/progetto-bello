@@ -50,7 +50,7 @@ export default class ListComponent extends HTMLElement{
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: #EFEFEF;
+            background-color:rgb(0, 0, 0);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -68,14 +68,13 @@ export default class ListComponent extends HTMLElement{
 			border: none;
 			cursor: pointer;
 			transition: all 0.2s ease-in-out;
-			box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 		}
 
 		.add-button-newTask:hover {
 			background-color: #000;
 			transform: translateY(-1px);
-			box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-	
+        }
+        
         @media (max-width: 768px) {
             .add-button-newTask {
             left: 32%;
@@ -146,7 +145,7 @@ export default class ListComponent extends HTMLElement{
 
 		document.addEventListener('todos-done', (event: any) => {
 			const todoId = event.detail;
-			this.todoService.makeTodosDone(todoId);
+			this.todoService.makeTodosDone(event, todoId);
 			this.render();
 		});
 	}
