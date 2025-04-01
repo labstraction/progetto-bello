@@ -44,32 +44,41 @@ export default class ListComponent extends HTMLElement{
 			padding: 0.4rem;
 			background-color: #f9f9f9;
             box-sizing: border-box;
-            padding: 100px;
+            padding-bottom: 90px;
 		}
 
         .footer {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color:rgb(0, 0, 0);
+            height: 80px;
+            background-color: transparent;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 1rem 0;
+            padding: 0;
             z-index: 1000;
         }
-        
-		.add-button-newTask {
-			border-radius: 12px;
-			font-size: 1rem;
-			font-weight: 600;
-			background-color: #222;
-			color: white;
-			padding: 12px 24px;
-			border: none;
-			cursor: pointer;
-			transition: all 0.2s ease-in-out;
-		}
+
+        .footer a {
+            display: block;
+            width: 99%;
+            height: 100%;
+        }
+
+        .add-button-newTask {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            background-color: #222;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
 
 		.add-button-newTask:hover {
 			background-color: #000;
@@ -78,69 +87,115 @@ export default class ListComponent extends HTMLElement{
         
         @media (max-width: 768px) {
             .add-button-newTask {
-            left: 32%;
+            left: 32%;}
         }
 		`
         this.shadowRoot!.appendChild(style);
     }
 
-    render(hash?: string){
-        let mainDiv = this.shadowRoot!.getElementById('list-container');
-        if (mainDiv) {
-            mainDiv.innerHTML = '';
-        } else {
-            mainDiv = document.createElement('div');
-            mainDiv.id = 'list-container';
-        }
+    render(hash?: string) {
+        // Rimuovo tutto tranne il <style>
+        Array.from(this.shadowRoot!.children).forEach(child => {
+            if (!(child instanceof HTMLStyleElement)) {
+                this.shadowRoot!.removeChild(child);
+            }
+        });
+    
+        const mainDiv = document.createElement('div');
+        mainDiv.id = 'list-container';
         mainDiv.classList.add('list-container');
-
+    
         const todos = this.todoService.todos;
-
+    
         todos.forEach((todo) => {
             const cardDiv = document.createElement('a');
             cardDiv.classList.add('card-container');
-            cardDiv.href = `#/detail?id=${todo.id}`; //assegna link id di todo con interpolata
-
+            cardDiv.href = `#/detail?id=${todo.id}`;
+    
             const card = new CardComponent();
-			//passa todo come attributo
-			card.setAttribute('todos', JSON.stringify(todo));
+            card.setAttribute('todos', JSON.stringify(todo));
             cardDiv.appendChild(card);
             mainDiv.appendChild(cardDiv);
         });
-
+    
         this.shadowRoot!.appendChild(mainDiv);
-
-        //crea il footer
-        let footer = this.shadowRoot!.getElementById('footer');
-            footer = document.createElement('div');
-            footer.id = 'footer';
-            footer.classList.add('footer');
-
-            const link = document.createElement('a');
-            if(hash!.includes('#/detail')){
-                const hashLink = window.location.hash;
-                const todoId = hashLink.replace("#/detail?id=", "");
-                link.href = `./#/new?id=${todoId}`;
-            } else {
-                link.href = './#/new';
-            }
-            
-            const addBtn = document.createElement('button');
-            addBtn.classList.add('add-button-newTask');
     
-            if (hash!.includes('#/detail')) {
-                const AddNode = document.createTextNode('NUOVO SUBTASK');
-                addBtn.appendChild(AddNode);
-            } else {
-                const AddNode = document.createTextNode('NUOVO TASK');
-                addBtn.appendChild(AddNode);
-            }
+        const footer = document.createElement('div');
+        footer.id = 'footer';
+        footer.classList.add('footer');
     
-            link.appendChild(addBtn);
-            footer.appendChild(link);
+        const link = document.createElement('a');
+        link.href = hash?.includes('#/detail')
+            ? `./#/new?id=${window.location.hash.replace("#/detail?id=", "")}`
+            : './#/new';
     
-            this.shadowRoot!.appendChild(footer);
+        const addBtn = document.createElement('button');
+        addBtn.classList.add('add-button-newTask');
+        addBtn.textContent = hash?.includes('#/detail') ? 'NUOVO SUBTASK' : 'NUOVO TASK';
+    
+        link.appendChild(addBtn);
+        footer.appendChild(link);
+        this.shadowRoot!.appendChild(footer);
     }
+    
+
+    // render(hash?: string){
+    //     let mainDiv = this.shadowRoot!.getElementById('list-container');
+    //     if (mainDiv) {
+    //         mainDiv.innerHTML = '';
+    //     } else {
+    //         mainDiv = document.createElement('div');
+    //         mainDiv.id = 'list-container';
+    //     }
+    //     mainDiv.classList.add('list-container');
+
+    //     const todos = this.todoService.todos;
+
+    //     todos.forEach((todo) => {
+    //         const cardDiv = document.createElement('a');
+    //         cardDiv.classList.add('card-container');
+    //         cardDiv.href = `#/detail?id=${todo.id}`; //assegna link id di todo con interpolata
+
+    //         const card = new CardComponent();
+	// 		//passa todo come attributo
+	// 		card.setAttribute('todos', JSON.stringify(todo));
+    //         cardDiv.appendChild(card);
+    //         mainDiv.appendChild(cardDiv);
+    //     });
+
+    //     this.shadowRoot!.appendChild(mainDiv);
+
+    //     //crea il footer
+    //     let footer = this.shadowRoot!.getElementById('footer');
+    //         footer = document.createElement('div');
+    //         footer.id = 'footer';
+    //         footer.classList.add('footer');
+
+    //         const link = document.createElement('a');
+    //         if(hash!.includes('#/detail')){
+    //             const hashLink = window.location.hash;
+    //             const todoId = hashLink.replace("#/detail?id=", "");
+    //             link.href = `./#/new?id=${todoId}`;
+    //         } else {
+    //             link.href = './#/new';
+    //         }
+            
+    //         const addBtn = document.createElement('button');
+    //         addBtn.classList.add('add-button-newTask');
+    
+    //         if (hash!.includes('#/detail')) {
+    //             const AddNode = document.createTextNode('NUOVO SUBTASK');
+    //             addBtn.appendChild(AddNode);
+    //         } else {
+    //             const AddNode = document.createTextNode('NUOVO TASK');
+    //             addBtn.appendChild(AddNode);
+    //         }
+    
+    //         link.appendChild(addBtn);
+    //         footer.appendChild(link);
+    
+    //         this.shadowRoot!.appendChild(footer);
+    // }
 
 	eventListener(){ // gestisce changeOrder e makeTodosDone
 		document.addEventListener('change-order', () => {

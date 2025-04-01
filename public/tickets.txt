@@ -28,4 +28,4 @@
 
 -DONE rimuovere riferimenti a cartella public (fanciulle)
 
-- fare in modo che il tasto 'nuovo task' non copra  i todo (fanciulle)
+-DONE fare in modo che il tasto 'nuovo task' non copra  i todo (fanciulle)
