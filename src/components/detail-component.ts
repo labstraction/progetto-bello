@@ -72,6 +72,7 @@ export default class DetailComponent extends HTMLElement{
                 text-transform: capitalize;
                 padding: 1rem;
                 box-sizing: border-box;
+                color: grey;
             }
 
             .task-detail {
@@ -88,7 +89,6 @@ export default class DetailComponent extends HTMLElement{
             .task-description {
                 font-size: large;
                 font-weight: bold;
-                color: grey;
             }
 
             .task-priority-date{
@@ -124,6 +124,7 @@ export default class DetailComponent extends HTMLElement{
                 font-size: smaller;
                 flex: 2;
                 min-width: 150px;
+                align-items: self-end;
             }
 
             /* Media query for smaller screens */
@@ -166,6 +167,8 @@ export default class DetailComponent extends HTMLElement{
         let terminationDateString = "";
         if(this.selectedTodo.terminationDate){
             terminationDateString = new Date(this.selectedTodo.terminationDate).toLocaleString();
+        } else {
+            terminationDateString = 'N/A'
         }
 
         mainDiv.innerHTML = `
@@ -179,8 +182,8 @@ export default class DetailComponent extends HTMLElement{
                         <img class="clock-img" src="${this.todoImage}" alt="">
                     </div>
                     <div class="task-date">
-                        <span>creation date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${creationDateString.slice(0,17)}</span>
-                        <span>expiration date:&nbsp;&nbsp;${terminationDateString.slice(0,17)}</span>
+                        <span>creation date: ${creationDateString.slice(0,17)}</span>
+                        <span>expiration date: ${terminationDateString.slice(0,17)}</span>
                     </div>
                 </div>
             </div>

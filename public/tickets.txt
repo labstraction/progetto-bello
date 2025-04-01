@@ -8,11 +8,11 @@
 
 -DONE nel dettaglio si può aggiungere il subtask (lorenzo/eusebio/jeremias)
 
-- implementare logiche di completamento (jan/hugo)
+- DONE implementare logiche di completamento (jan/hugo)
 
 -DONE scurire il testo della description (fanciulle)
 
-- pagina di dettaglio da migliorare graficamente e con lista dei subtodo (nel dettaglio voglio anche il numero dei subtodo) (lorenzo/eusebio/jeremias)
+-DONE IN ATTESA DI TEST SUBTASK pagina di dettaglio da migliorare graficamente e con lista dei subtodo (nel dettaglio voglio anche il numero dei subtodo) (lorenzo/eusebio/jeremias)
 
 - implementare flusso di creazione del subtodo (jan/hugo) passiamo l'id del task nell'url del newsubtask quando siamo nel detail
 
