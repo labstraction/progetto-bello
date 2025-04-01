@@ -207,7 +207,7 @@ export default class FormComponent extends HTMLElement {
     }
 
     cancelForm() {
-        window.location.href = "/#/home/";
+        window.location.href = "./#/home/";
     }
 
     confirmForm() {
@@ -228,7 +228,7 @@ export default class FormComponent extends HTMLElement {
         }
 
         this.service.addTodos(todo);
-        const url = "/#/home/";
+        const url = "./#/home/";
         window.location.href = url;
     }
 
