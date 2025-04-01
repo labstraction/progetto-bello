@@ -14,7 +14,7 @@ export default class NavigationComponent extends HTMLElement{
 
     connectedCallback(){
         this.styling();
-        this.render(window.location.hash);
+        this.render();
     }
 
     styling(){
@@ -97,7 +97,7 @@ export default class NavigationComponent extends HTMLElement{
         this.shadowRoot!.appendChild(style);
     }
 
-    render(hash?: string){
+    render(){
 
         let mainDiv = this.shadowRoot!.getElementById('navigation-container');
         if (mainDiv) {

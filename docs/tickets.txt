@@ -1,0 +1,33 @@
+
+-DONE spostare tasto "nuovo task" nel componente lista e 
+  renderlo come barra in fondo all'applicazione (a tutta larghezza) (fanciulle)
+
+-DONE aggiustare ordinamento per scadenza (andrea)
+
+-DONE nuovo task: tasto salva e annulla in fondo mantenere un sfondo di stacco dal bianco (jan/hugo)
+
+-DONE nel dettaglio si può aggiungere il subtask (lorenzo/eusebio/jeremias)
+
+- DONE implementare logiche di completamento (jan/hugo)
+
+-DONE scurire il testo della description (fanciulle)
+
+-DONE IN ATTESA DI TEST SUBTASK pagina di dettaglio da migliorare graficamente e con lista dei subtodo (nel dettaglio voglio anche il numero dei subtodo) (lorenzo/eusebio/jeremias)
+
+- implementare flusso di creazione del subtodo (jan/hugo) passiamo l'id del task nell'url del newsubtask quando siamo nel detail
+
+-DONE riorganizzare card todo e testo max 3 lines (fanciulle)
+
+- DONE pagaina ricarica correttamente dopo task is done 
+
+-DONE description è required (jan/hugo)
+
+-DONE correggere routing
+
+- caricare altre 404 (fanciulle)
+
+- caricare su pages (andrea)
+
+-DONE rimuovere riferimenti a cartella public (fanciulle)
+
+-DONE fare in modo che il tasto 'nuovo task' non copra  i todo (fanciulle)
