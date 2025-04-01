@@ -42,7 +42,7 @@ export default class ErrorPageComponentLa extends HTMLElement {
 
             a {
                 margin-top: 20px;
-                display: inline-block;
+                display: block;
                 padding: 10px 20px;
                 background-color: #00d6c6;
                 color: white;
