@@ -41,14 +41,16 @@ export default class FormComponent extends HTMLElement {
         #form-container {
             font-family:"Signika Negative", sans-serif;
             padding: 16px;
-            /* border: 1px solid #ccc; */
-           /*  border-radius: 8px; */
-            
-          max-width: 400px; 
+            background-color: #EFEFEF;
+            max-width: 400px; 
             margin: auto;
-           /*  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+            margin-top: 5%;
 
         }
+
+        // #form{
+        //     height: 80vh;
+        // }
 
         h3 {
             font-family: "Signika Negative", sans-serif;
@@ -110,20 +112,27 @@ export default class FormComponent extends HTMLElement {
         }
 
         .button-container {
+            position: absolute;
+            bottom: 5%;
+            left:0;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             gap: 50px;
-            margin-top: 24px;
+            // margin-top: 24px;
+            align-items: center;
+            width: 100%;
         }
 
         button {
             display: block;
-            width: 100%;
+
+            min-width: 8rem;
             margin-top: 12px;
             padding: 8px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
+            box-sizing: border-box;
         }
 
         #cancel {
