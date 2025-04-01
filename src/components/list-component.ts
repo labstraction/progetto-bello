@@ -94,109 +94,123 @@ export default class ListComponent extends HTMLElement{
         this.shadowRoot!.appendChild(style);
     }
 
-    render(hash?: string) {
-        // Rimuovo tutto tranne il <style>
-        Array.from(this.shadowRoot!.children).forEach(child => {
-            if (!(child instanceof HTMLStyleElement)) {
-                this.shadowRoot!.removeChild(child);
-            }
-        });
+    // render(hash?: string) {
+    //     // Rimuovo tutto tranne il <style>
+    //     Array.from(this.shadowRoot!.children).forEach(child => {
+    //         if (!(child instanceof HTMLStyleElement)) {
+    //             this.shadowRoot!.removeChild(child);
+    //         }
+    //     });
     
-        const mainDiv = document.createElement('div');
-        mainDiv.id = 'list-container';
-        mainDiv.classList.add('list-container');
-    
-        const todos = this.todoService.todos;
-    
-        todos.forEach((todo) => {
-            const cardDiv = document.createElement('a');
-            cardDiv.classList.add('card-container');
-            cardDiv.href = `#/detail?id=${todo.id}`;
-    
-            const card = new CardComponent();
-            card.setAttribute('todos', JSON.stringify(todo));
-            cardDiv.appendChild(card);
-            mainDiv.appendChild(cardDiv);
-        });
-    
-        this.shadowRoot!.appendChild(mainDiv);
-    
-        const footer = document.createElement('div');
-        footer.id = 'footer';
-        footer.classList.add('footer');
-    
-        const link = document.createElement('a');
-        link.href = hash?.includes('#/detail')
-            ? `./#/new?id=${window.location.hash.replace("#/detail?id=", "")}`
-            : './#/new';
-    
-        const addBtn = document.createElement('button');
-        addBtn.classList.add('add-button-newTask');
-        addBtn.textContent = hash?.includes('#/detail') ? 'NUOVO SUBTASK' : 'NUOVO TASK';
-    
-        link.appendChild(addBtn);
-        footer.appendChild(link);
-        this.shadowRoot!.appendChild(footer);
-    }
-    
-
-    // render(hash?: string){
-    //     let mainDiv = this.shadowRoot!.getElementById('list-container');
-    //     if (mainDiv) {
-    //         mainDiv.innerHTML = '';
-    //     } else {
-    //         mainDiv = document.createElement('div');
-    //         mainDiv.id = 'list-container';
-    //     }
+    //     const mainDiv = document.createElement('div');
+    //     mainDiv.id = 'list-container';
     //     mainDiv.classList.add('list-container');
-
+    
     //     const todos = this.todoService.todos;
-
+    
     //     todos.forEach((todo) => {
     //         const cardDiv = document.createElement('a');
     //         cardDiv.classList.add('card-container');
-    //         cardDiv.href = `#/detail?id=${todo.id}`; //assegna link id di todo con interpolata
-
+    //         cardDiv.href = `#/detail?id=${todo.id}`;
+    
     //         const card = new CardComponent();
-	// 		//passa todo come attributo
-	// 		card.setAttribute('todos', JSON.stringify(todo));
+    //         card.setAttribute('todos', JSON.stringify(todo));
     //         cardDiv.appendChild(card);
     //         mainDiv.appendChild(cardDiv);
     //     });
-
+    
     //     this.shadowRoot!.appendChild(mainDiv);
-
-    //     //crea il footer
-    //     let footer = this.shadowRoot!.getElementById('footer');
-    //         footer = document.createElement('div');
-    //         footer.id = 'footer';
-    //         footer.classList.add('footer');
-
-    //         const link = document.createElement('a');
-    //         if(hash!.includes('#/detail')){
-    //             const hashLink = window.location.hash;
-    //             const todoId = hashLink.replace("#/detail?id=", "");
-    //             link.href = `./#/new?id=${todoId}`;
-    //         } else {
-    //             link.href = './#/new';
-    //         }
-            
-    //         const addBtn = document.createElement('button');
-    //         addBtn.classList.add('add-button-newTask');
     
-    //         if (hash!.includes('#/detail')) {
-    //             const AddNode = document.createTextNode('NUOVO SUBTASK');
-    //             addBtn.appendChild(AddNode);
-    //         } else {
-    //             const AddNode = document.createTextNode('NUOVO TASK');
-    //             addBtn.appendChild(AddNode);
-    //         }
+    //     const footer = document.createElement('div');
+    //     footer.id = 'footer';
+    //     footer.classList.add('footer');
     
-    //         link.appendChild(addBtn);
-    //         footer.appendChild(link);
+    //     const link = document.createElement('a');
+    //     link.href = hash?.includes('#/detail')
+    //         ? `./#/new?id=${window.location.hash.replace("#/detail?id=", "")}`
+    //         : './#/new';
     
-    //         this.shadowRoot!.appendChild(footer);
+    //     const addBtn = document.createElement('button');
+    //     addBtn.classList.add('add-button-newTask');
+    //     addBtn.textContent = hash?.includes('#/detail') ? 'NUOVO SUBTASK' : 'NUOVO TASK';
+    
+    //     link.appendChild(addBtn);
+    //     footer.appendChild(link);
+    //     this.shadowRoot!.appendChild(footer);
     // }
+    
+
+    render(hash?: string){
+        let mainDiv = this.shadowRoot!.getElementById('list-container');
+        if (mainDiv) {
+            mainDiv.innerHTML = '';
+        } else {
+            mainDiv = document.createElement('div');
+            mainDiv.id = 'list-container';
+        }
+        mainDiv.classList.add('list-container');
+
+        let todos: Todos[];
+        if(hash!.includes('#/detail')){
+            const hashLink = window.location.hash;
+            const todoId = hashLink.replace("#/detail?id=", "");
+            const service = TodoService.getInstance();
+            const selectedTodo = service.findTodosRec(service.todos, todoId) as Todos;
+            if(selectedTodo.subTodosArray){
+                todos = selectedTodo.subTodosArray;
+            } else {
+                todos = [];
+            }
+            
+        } else {
+            todos = this.todoService.todos;
+        }
+
+        todos.forEach((todo) => {
+            const cardDiv = document.createElement('a');
+            cardDiv.classList.add('card-container');
+            cardDiv.href = `#/detail?id=${todo.id}`; //assegna link id di todo con interpolata
+
+            const card = new CardComponent();
+			//passa todo come attributo
+			card.setAttribute('todos', JSON.stringify(todo));
+            cardDiv.appendChild(card);
+            mainDiv.appendChild(cardDiv);
+        });
+
+        this.shadowRoot!.appendChild(mainDiv);
+
+        //crea il footer
+        let footer = this.shadowRoot!.getElementById('footer');
+            footer = document.createElement('div');
+            footer.id = 'footer';
+            footer.classList.add('footer');
+
+            const link = document.createElement('a');
+            if(hash!.includes('#/detail')){
+                const hashLink = window.location.hash;
+                const todoId = hashLink.replace("#/detail?id=", "");
+                link.href = `./#/new?id=${todoId}`;
+            } else {
+                link.href = './#/new';
+            }
+            
+            const addBtn = document.createElement('button');
+            addBtn.classList.add('add-button-newTask');
+    
+            if (hash!.includes('#/detail')) {
+                const AddNode = document.createTextNode('NUOVO SUBTASK');
+                addBtn.appendChild(AddNode);
+            } else {
+                const AddNode = document.createTextNode('NUOVO TASK');
+                addBtn.appendChild(AddNode);
+            }
+    
+            link.appendChild(addBtn);
+            footer.appendChild(link);
+    
+            this.shadowRoot!.appendChild(footer);
+    }
 
 	eventListener(){ // gestisce changeOrder e makeTodosDone
 		document.addEventListener('change-order', () => {
