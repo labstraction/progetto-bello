@@ -78,7 +78,7 @@ class ErrorPageComponentEu extends HTMLElement {
           <div class="content">
             <h1>404</h1>
             <p>Opss... Pagina non trovata!</p>
-            <a href="/">Home</a>
+            <a href="#/home">Home</a>
           </div>
         </div>
       `;
