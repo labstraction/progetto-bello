@@ -18,6 +18,8 @@
 
 -DONE riorganizzare card todo e testo max 3 lines (fanciulle)
 
+- DONE pagaina ricarica correttamente dopo task is done 
+
 -DONE description è required (jan/hugo)
 
 -DONE correggere routing
