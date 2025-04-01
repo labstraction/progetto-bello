@@ -72,6 +72,7 @@ export default class DetailComponent extends HTMLElement{
                 text-transform: capitalize;
                 padding: 1rem;
                 box-sizing: border-box;
+                color: grey;
             }
 
             .task-detail {
@@ -88,7 +89,6 @@ export default class DetailComponent extends HTMLElement{
             .task-description {
                 font-size: large;
                 font-weight: bold;
-                color: grey;
             }
 
             .task-priority-date{
