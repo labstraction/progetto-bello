@@ -136,7 +136,7 @@ export default class ListComponent extends HTMLElement{
         todos.forEach((todo) => {
             const cardDiv = document.createElement('a');
             cardDiv.classList.add('card-container');
-            cardDiv.href = `#/detail?id=${todo.id}`; //assegna link id di todo con interpolata
+            cardDiv.href = `./#/detail?id=${todo.id}`; //assegna link id di todo con interpolata
 
             const card = new CardComponent();
 			//passa todo come attributo
