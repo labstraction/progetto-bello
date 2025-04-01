@@ -3,7 +3,9 @@
 // icona->link che riporta alla home
 // nome app
 // tasto per ordinare i todo -> priorità / scadenza (appare solo in home e manda al componente lista un evento chiamato change-order)
-// tasto aggiungi che manda alla pagina new 
+// tasto aggiungi che manda alla pagina new
+import logoUrl from '../../public/LOGO_home_button.png'
+import sortImageUrl from '../../public/sorting-button.svg'
 
 export default class NavigationComponent extends HTMLElement{
 
@@ -114,7 +116,7 @@ export default class NavigationComponent extends HTMLElement{
         externalDiv.innerHTML = `
 		<div class="home-title-group">
             <a class="home-link" href="./#/home">
-                <img class="home-logo" src="../LOGO_home_button.png" alt="icon-home">
+                <img class="home-logo" src="${logoUrl}" alt="icon-home">
             </a>
             <h1>Tasky Task</h1>
 		</div>
@@ -124,7 +126,7 @@ export default class NavigationComponent extends HTMLElement{
         const orderIcon = document.createElement("img");
         orderBtn.classList.add("order-button");
         orderIcon.classList.add("order-img");
-        orderIcon.src = "../sorting-button.svg";
+        orderIcon.src = sortImageUrl;
         orderBtn.appendChild(orderIcon);
         orderBtn.addEventListener("click", () => this.dispatchChangeOrder());
         externalDiv.appendChild(orderBtn);
