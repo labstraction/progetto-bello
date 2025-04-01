@@ -62,7 +62,7 @@ export default class CardComponent extends HTMLElement {
       }
 
       .task-summary {
-        color: black;
+        color: #222;
         font-weight: light;
         display: block;
         max-width:100%;
