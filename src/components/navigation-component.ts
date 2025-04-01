@@ -118,7 +118,7 @@ export default class NavigationComponent extends HTMLElement{
 
         externalDiv.innerHTML = `
 		<div class="home-title-group">
-            <a class="home-link" href="./#home">
+            <a class="home-link" href="./#/home">
                 <img class="home-logo" src="../public/LOGO_home_button.png" alt="icon-home">
             </a>
             <h1>Tasky Task</h1>
@@ -145,6 +145,4 @@ export default class NavigationComponent extends HTMLElement{
     }
 
 }
-
-
 customElements.define('navigation-component', NavigationComponent)

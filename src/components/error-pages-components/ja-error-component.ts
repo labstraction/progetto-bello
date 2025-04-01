@@ -150,4 +150,4 @@ export default class ErrorPageComponentJa extends HTMLElement {
         });
     }
 }
-customElements.define('ja-error-component', ErrorPageComponentJa);
+customElements.define('error-page-component-ja', ErrorPageComponentJa);

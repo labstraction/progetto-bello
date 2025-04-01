@@ -1,4 +1,4 @@
-export default class ErrorPageComponent extends HTMLElement {
+export default class ErrorPageComponentLo extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({mode: 'open'});
@@ -113,4 +113,4 @@ export default class ErrorPageComponent extends HTMLElement {
         this.shadowRoot!.appendChild(mainDiv);
     }
 }
-customElements.define('lo-error-component', ErrorPageComponent);
+customElements.define('error-page-component-lo', ErrorPageComponentLo);
