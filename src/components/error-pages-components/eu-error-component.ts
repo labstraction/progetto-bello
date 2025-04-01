@@ -1,5 +1,5 @@
 // Define the 404 Error Page as a Web Component
-class ErrorPage404 extends HTMLElement {
+class ErrorPageComponentEu extends HTMLElement {
     private canvas: HTMLCanvasElement | null = null;
   
     constructor() {
@@ -78,7 +78,7 @@ class ErrorPage404 extends HTMLElement {
           <div class="content">
             <h1>404</h1>
             <p>Opss... Pagina non trovata!</p>
-            <a href="index.html">Home</a>
+            <a href="/">Home</a>
           </div>
         </div>
       `;
@@ -196,5 +196,5 @@ class ErrorPage404 extends HTMLElement {
   }
   
   // Register the custom element
-  customElements.define("error-page-404", ErrorPage404);
+  customElements.define("error-page-component-eu", ErrorPageComponentEu);
   
