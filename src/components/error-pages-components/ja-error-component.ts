@@ -109,13 +109,14 @@ export default class ErrorPageComponentJa extends HTMLElement {
     eyemovement() {
         this.shadowRoot!.addEventListener("mousemove", (event) => {
             const eyes = this.shadowRoot!.querySelectorAll(".eye");
+            const myEvent = event as MouseEvent;
             eyes.forEach(eye => {
                 const pupil = eye.querySelector(".pupil") as HTMLDivElement;
                 const rect = eye.getBoundingClientRect();
                 const eyeCenterX = rect.left + rect.width / 2;
                 const eyeCenterY = rect.top + rect.height / 2;
-                const deltaX = event.clientX - eyeCenterX;
-                const deltaY = event.clientY - eyeCenterY;
+                const deltaX = myEvent.clientX - eyeCenterX;
+                const deltaY = myEvent.clientY - eyeCenterY;
                 const angle = Math.atan2(deltaY, deltaX);
                 const maxMove = 10;
                 const moveX = Math.cos(angle) * maxMove;
