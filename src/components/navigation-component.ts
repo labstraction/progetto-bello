@@ -124,7 +124,7 @@ export default class NavigationComponent extends HTMLElement{
         const orderIcon = document.createElement("img");
         orderBtn.classList.add("order-button");
         orderIcon.classList.add("order-img");
-        orderIcon.src = "../public/sorting-button.svg";
+        orderIcon.src = "../sorting-button.svg";
         orderBtn.appendChild(orderIcon);
         orderBtn.addEventListener("click", () => this.dispatchChangeOrder());
         externalDiv.appendChild(orderBtn);

@@ -67,7 +67,7 @@ export default class DetailComponent extends HTMLElement{
         style.innerText = `
             @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Signika+Negative:wght@300..700&display=swap');
 
-            #detail-container{
+            #detail-container {
                 font-family:"Signika Negative", sans-serif;
                 text-transform: capitalize;
             }
@@ -92,6 +92,8 @@ export default class DetailComponent extends HTMLElement{
 
             .task-description {
                 font-size: large;
+                font-weight: bold;
+                color: grey;
             }
 
             .task-priority-date{
@@ -115,6 +117,7 @@ export default class DetailComponent extends HTMLElement{
             }
 
             .task-date{
+                font-weight: bold;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;

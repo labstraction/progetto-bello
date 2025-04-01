@@ -96,7 +96,7 @@ export default class ErrorPageComponentJa extends HTMLElement {
             <h1>Error 404</h1>
             <h3>Page not found.</h3>
             <p>Please, check your connection and try again.</p>
-            <a href="/">Reload</a>
+            <a href="#/home">Reload</a>
             <div class="ecg-container">
                 <svg width="100%" height="100" viewBox="0 0 300 100">
                     <path class="ecg-line" d="M0,50 L30,50 L40,20 L50,80 L60,50 L90,50 L100,30 L110,50 L120,70 L130,50 L160,50 L170,20 L180,50 L190,80 L200,50 L230,50 L240,30 L250,50 L260,70 L270,50 L300,50"/>
@@ -109,13 +109,14 @@ export default class ErrorPageComponentJa extends HTMLElement {
     eyemovement() {
         this.shadowRoot!.addEventListener("mousemove", (event) => {
             const eyes = this.shadowRoot!.querySelectorAll(".eye");
+            const myEvent = event as MouseEvent;
             eyes.forEach(eye => {
                 const pupil = eye.querySelector(".pupil") as HTMLDivElement;
                 const rect = eye.getBoundingClientRect();
                 const eyeCenterX = rect.left + rect.width / 2;
                 const eyeCenterY = rect.top + rect.height / 2;
-                const deltaX = event.clientX - eyeCenterX;
-                const deltaY = event.clientY - eyeCenterY;
+                const deltaX = myEvent.clientX - eyeCenterX;
+                const deltaY = myEvent.clientY - eyeCenterY;
                 const angle = Math.atan2(deltaY, deltaX);
                 const maxMove = 10;
                 const moveX = Math.cos(angle) * maxMove;
