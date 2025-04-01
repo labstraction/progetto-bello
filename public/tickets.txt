@@ -6,7 +6,7 @@
 
 - nuovo task: tasto salva e annulla in fondo mantenere un sfondo di stacco dal bianco (jan/hugo)
 
-- nel dettaglio si può aggiungere il subtask (lorenzo/eusebio/jeremias)
+- DONE nel dettaglio si può aggiungere il subtask (lorenzo/eusebio/jeremias)
 
 - implementare logiche di completamento (jan/hugo)
 
@@ -14,7 +14,7 @@
 
 - pagina di dettaglio da migliorare graficamente e con lista dei subtodo (nel dettaglio voglio anche il numero dei subtodo) (lorenzo/eusebio/jeremias)
 
-- implementare flusso di creazione del subtodo (jan/hugo)
+- implementare flusso di creazione del subtodo (jan/hugo) passiamo l'id del task nell'url del newsubtask quando siamo nel detail
 
 - riorganizzare card todo e testo max 3 lines (fanciulle)
 
