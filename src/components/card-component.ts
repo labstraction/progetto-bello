@@ -217,7 +217,8 @@ export default class CardComponent extends HTMLElement {
     if (this.todos.isDone) {
       doneBtn.classList.add("done");
     }
-    doneBtn.addEventListener("click", (event) => this.todoService.makeTodosDone(event, this.todos.id));
+    // doneBtn.addEventListener("click", (event) => this.todoService.makeTodosDone(event, this.todos.id));
+    doneBtn.addEventListener('click', (event) => this.dispatchCompleteTaskEvent(event) )
     const doneIcon = document.createElement("img");
     doneIcon.src = "../check-double-svgrepo-com.svg";
     doneIcon.alt = "done";
@@ -231,8 +232,10 @@ export default class CardComponent extends HTMLElement {
     this.shadowRoot!.appendChild(mainDiv);
   }
 
-  dispatchCompleteTaskEvent() {
-    const completeEvent = new CustomEvent('todos-done', { detail: this.todos.id })
+  dispatchCompleteTaskEvent(event: Event) {
+    event.preventDefault()
+    const completeEvent = new CustomEvent<string>('todos-done', { detail: this.todos.id })
+    // const event = new CustomEvent<string>('emoji-value', { detail: this.emojiValue });
     document.dispatchEvent(completeEvent)
   }
 }
