@@ -1,27 +1,31 @@
 
 - spostare tasto "nuovo task" nel componente lista e 
-  renderlo come barra in fondo all'applicazione (a tutta larghezza)
+  renderlo come barra in fondo all'applicazione (a tutta larghezza) (fanciulle)
 
-- aggiustare ordinamento per scadenza
+- DONE aggiustare ordinamento per scadenza (andrea)
 
-- nuovo task: tasto salva e annulla in fondo mantenere un sfondo di stacco dal bianco
+- nuovo task: tasto salva e annulla in fondo mantenere un sfondo di stacco dal bianco (jan/hugo)
 
-- nel dettaglio si può aggiungere il subtask
+- nel dettaglio si può aggiungere il subtask (lorenzo/eusebio/jeremias)
 
-- implementare logiche di completamento
+- implementare logiche di completamento (jan/hugo)
 
-- scurire il testo della description
+- scurire il testo della description (fanciulle)
 
-- pagina di dettaglio da migliorare graficamente e con lista dei subtodo
+- pagina di dettaglio da migliorare graficamente e con lista dei subtodo (nel dettaglio voglio anche il numero dei subtodo) (lorenzo/eusebio/jeremias)
 
-- implementare flusso di creazione del subtodo
+- implementare flusso di creazione del subtodo (jan/hugo)
 
-- riorganizzare card todo e testo max 3 lines
+- riorganizzare card todo e testo max 3 lines (fanciulle)
 
-- description è required
+- description è required (jan/hugo)
 
-- correggere routing
+-DONE correggere routing
 
-- caricare altre 404
+- caricare altre 404 (fanciulle)
 
 - caricare su pages (andrea)
+
+-DONE rimuovere riferimenti a cartella public (fanciulle)
+
+- fare in modo che il tasto 'nuovo task' non copra  i todo (fanciulle)
