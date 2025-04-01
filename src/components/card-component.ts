@@ -4,17 +4,20 @@
 //conterrà un tasto che completa il todo e manda un evento chiamato 'todos-done' che invia l'id del todo
 // avrà un attributo che si chiamerò todos
 import Todos from "../model/todo";
+import TodoService from "../services/todo-service";
 import spoiledClock from "/00_SPOILED_clock-xmark-svgrepo-com.svg?url"
-import veryUrgentClock from  "/0_VERY_URGENT_clock-exclamation-svgrepo-com.svg?url"
+import veryUrgentClock from "/0_VERY_URGENT_clock-exclamation-svgrepo-com.svg?url"
 import urgentClock from "/1_URGENT_clock-lines-svgrepo-com.svg?url"
-import notUrgentClock from  "/2_NOT_URGENT_clock-three-svgrepo-com.svg?url"
+import notUrgentClock from "/2_NOT_URGENT_clock-three-svgrepo-com.svg?url"
 import easyCLock from "/3_EASY_clock-twelve-svgrepo-com.svg?url"
 
 export default class CardComponent extends HTMLElement {
+  todoService: TodoService;
 
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this.todoService = TodoService.getInstance();
   }
 
   connectedCallback() {
@@ -37,9 +40,9 @@ export default class CardComponent extends HTMLElement {
       default:
         return '#ff6666'
     }
-      
 
-    return 
+
+    return
   }
 
   styling() {
@@ -51,7 +54,7 @@ export default class CardComponent extends HTMLElement {
         box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.2);
         margin-bottom: 0.5rem;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 3fr 2fr;
       }
 
       .task-txt-info{
@@ -62,7 +65,7 @@ export default class CardComponent extends HTMLElement {
         color: gray;
         font-weight: bold;
         display: block;
-        max-width:50%;
+        max-width:100%;
       }
 
       .task-icon-info {
@@ -95,9 +98,16 @@ export default class CardComponent extends HTMLElement {
         box-sizing: border-box;
       }
 
-      .done-icon-container{
+      .done-icon-container {
         width: 2rem;
         height: 2rem;
+        background-color: transparent;
+        border: none;
+      }
+
+      .done-icon-container.done {
+        background-color: green;
+        border-radius: 50%;
       }
 
       .done-icon{
@@ -109,7 +119,7 @@ export default class CardComponent extends HTMLElement {
   }
 
   get todoImage() {
-    const priority = this.todos.priority 
+    const priority = this.todos.priority
 
     switch (priority) {
       case 3:
@@ -130,28 +140,28 @@ export default class CardComponent extends HTMLElement {
   }
 
   getRemainingTime() {
-    if (!this.todos.terminationDate) return {label: '', value:0}
+    if (!this.todos.terminationDate) return { label: '', value: 0 }
     // calculate remaining time in milliseconds 
     const timeDifference = this.todos.terminationDate - Date.now()
-    if (timeDifference < 0) return {label: '', value: 0}
+    if (timeDifference < 0) return { label: '', value: 0 }
 
     const remainingTimeInSeconds = timeDifference / 1000
-    const timeAvailableInDays = remainingTimeInSeconds / (60 * 60 * 24) 
+    const timeAvailableInDays = remainingTimeInSeconds / (60 * 60 * 24)
 
     if (timeAvailableInDays >= 1) {
-        return {label: 'day(s)', value: Math.round(timeAvailableInDays)}
+      return { label: 'day(s)', value: Math.round(timeAvailableInDays) }
     }
-    const timeAvailableInHours = remainingTimeInSeconds / (60 * 60) 
+    const timeAvailableInHours = remainingTimeInSeconds / (60 * 60)
     if (timeAvailableInHours >= 1) {
-        return {label: 'hour(s)', value: Math.round(timeAvailableInHours)}
+      return { label: 'hour(s)', value: Math.round(timeAvailableInHours) }
     }
 
-    const timeAvailableInMinuets = remainingTimeInSeconds / 60  
+    const timeAvailableInMinuets = remainingTimeInSeconds / 60
     if (timeAvailableInMinuets >= 1) {
-      return {label: 'minute(s)', value: Math.round(timeAvailableInMinuets)}
+      return { label: 'minute(s)', value: Math.round(timeAvailableInMinuets) }
     }
 
-    return {label: 'second(s)', value: Math.round(remainingTimeInSeconds)}
+    return { label: 'second(s)', value: Math.round(remainingTimeInSeconds) }
   }
 
   render() {
@@ -163,36 +173,51 @@ export default class CardComponent extends HTMLElement {
       mainDiv.id = "card-container";
     }
 
-    const {label, value} = this.getRemainingTime()
+    const { label, value } = this.getRemainingTime()
 
     // const todosTitle = this.todos.description.split(" ", 2);
     // let todosTitle2 = todosTitle.join(",")
     // todosTitle2 = todosTitle2.replace(",", " ")
     // console.log(todosTitle2);
 
-    mainDiv.innerHTML = `
-      <div class="task-container">
+    const taskContainer = document.createElement("div");
+    taskContainer.classList.add("task-container");
+    taskContainer.innerHTML = `
         <div class="task-txt-info">
           <span class="task-summary">${this.todos.description}</span>
         </div>
-        <div class="task-icon-info">
-          <div class="done-icon-container">
-            <img class="done-icon" src="../public/check-double-svgrepo-com.svg" alt="done">
-          </div>
+      `
+
+    const taskIconInfo = document.createElement("div");
+    taskIconInfo.classList.add("task-icon-info");
+    taskIconInfo.innerHTML = `
           <div class="task-time-container">
 	          <img class="clock-img" src=${this.todoImage} alt="">
-            <time class="time-span" datetime="">${value!==0?value:""} ${label}</time>
+            <time class="time-span" datetime="">${value !== 0 ? value : ""} ${label}</time>
           </div>
-        </div>
-      </div>
-    
-    `
+      `
+
+    const doneBtn = document.createElement("button");
+    doneBtn.classList.add("done-icon-container");
+    if (this.todos.isDone) {
+      doneBtn.classList.add("done");
+    }
+    doneBtn.addEventListener("click", (event) => this.todoService.makeTodosDone(event, this.todos.id));
+    const doneIcon = document.createElement("img");
+    doneIcon.src = "../public/check-double-svgrepo-com.svg";
+    doneIcon.alt = "done";
+    doneIcon.classList.add("done-icon");
+
+    doneBtn.appendChild(doneIcon);
+    taskIconInfo.appendChild(doneBtn);
+    taskContainer.appendChild(taskIconInfo);
+    mainDiv.appendChild(taskContainer);
 
     this.shadowRoot!.appendChild(mainDiv);
   }
 
   dispatchCompleteTaskEvent() {
-    const completeEvent = new CustomEvent('todos-done', {detail: this.todos.id})
+    const completeEvent = new CustomEvent('todos-done', { detail: this.todos.id })
     document.dispatchEvent(completeEvent)
   }
 }

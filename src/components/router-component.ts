@@ -1,9 +1,4 @@
-
-
 export default class RouterComponent extends HTMLElement{
-
-
-
     constructor(){
         super();
         this.attachShadow({mode: 'open'});
@@ -16,6 +11,16 @@ export default class RouterComponent extends HTMLElement{
         });
         this.render(window.location.hash)
         this.styling()
+    }
+
+    async getRandomComponent() {
+        const componentFiles = [
+            'error-page-component-lo',
+            'error-page-component-ja'
+        ];
+        const randomIndex = Math.floor(Math.random() * componentFiles.length);
+        const randomFile = componentFiles[randomIndex];
+        return randomFile;
     }
 
     styling(){
@@ -32,7 +37,7 @@ export default class RouterComponent extends HTMLElement{
         this.shadowRoot!.appendChild(style);
     }
 
-    render(hash?: string){
+    async render(hash?: string){
 
         let mainDiv = this.shadowRoot!.getElementById('app');
         if (mainDiv) {
@@ -41,8 +46,6 @@ export default class RouterComponent extends HTMLElement{
             mainDiv = document.createElement('div');
             mainDiv.id = 'app';
         }
-
-
 
         if(hash?.includes('#/detail')){
             mainDiv.innerHTML = `
@@ -55,18 +58,23 @@ export default class RouterComponent extends HTMLElement{
                 <navigation-component></navigation-component>
                 <form-component></form-component>
             `
-        } else {
+        } else if(hash?.includes('#/home')){
             mainDiv.innerHTML = `
                 <navigation-component></navigation-component>
                 <list-component></list-component>
             `
             window.location.hash = '#/home'
+        } else {
+            debugger;
+            const randomErrorComponent = await this.getRandomComponent();
+            mainDiv.innerHTML = `
+                <navigation-component></navigation-component>
+                <${randomErrorComponent}></${randomErrorComponent}>
+            `
+            window.location.hash = '#/404'
         }
-
         this.shadowRoot!.appendChild(mainDiv);
     }
-
-
 }
 
 

@@ -58,23 +58,24 @@ export default class ListComponent extends HTMLElement{
             z-index: 1000;
         }
         
-        .add-button-newTask {
-            border-radius: 16px;
-            font-size: 1.1rem;
-            font-family: "DM Sans", sans-serif;
-            font-weight: 500;
-            background-color: black;
-            width: 130px;
-            height: 50px;
-            color: white;
-            padding: 2px;
-            cursor: pointer;
-        }
+		.add-button-newTask {
+			border-radius: 12px;
+			font-size: 1rem;
+			font-weight: 600;
+			background-color: #222;
+			color: white;
+			padding: 12px 24px;
+			border: none;
+			cursor: pointer;
+			transition: all 0.2s ease-in-out;
+			box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+		}
 
-        .add-button-newTask:hover{
-            background-color: rgba(0, 0, 0, 0.84);
-        }
-
+		.add-button-newTask:hover {
+			background-color: #000;
+			transform: translateY(-1px);
+			box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+	
         @media (max-width: 768px) {
             .add-button-newTask {
             left: 32%;
@@ -132,7 +133,6 @@ export default class ListComponent extends HTMLElement{
             link.appendChild(addBtn);
             footer.appendChild(link);
     
-            // Aggiungi il footer al shadow DOM
             this.shadowRoot!.appendChild(footer);
         }
     }
