@@ -12,18 +12,16 @@ export default class ErrorPageComponentLa extends HTMLElement {
     styling() {
         const style = document.createElement('style');
         style.innerText = `
-            body {
-                margin: 0;
-                padding: 0;
-                font-family: "Signika Negative", sans-serif;
-                background-color: #f9f9f9;
-                color: #333;
+            :host {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 height: 100vh;
                 text-align: center;
+                font-family: "Signika Negative", sans-serif;
+                background-color: #f9f9f9;
+                color: #333;
             }
 
             h1 {
