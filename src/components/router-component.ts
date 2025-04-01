@@ -47,31 +47,30 @@ export default class RouterComponent extends HTMLElement{
             mainDiv.id = 'app';
         }
 
-        if(hash?.includes('#/detail')){
+        if (!hash || hash.includes('#/home')) {
+            mainDiv.innerHTML = `
+                <navigation-component></navigation-component>
+                <list-component></list-component>
+            `;
+            window.location.hash = '#/home';
+        } else if (hash.includes('#/detail')) {
             mainDiv.innerHTML = `
                 <navigation-component></navigation-component>
                 <detail-component></detail-component>
                 <list-component></list-component>
-            `
-        } else if(hash?.includes('#/new')){
+            `;
+        } else if (hash.includes('#/new')) {
             mainDiv.innerHTML = `
                 <navigation-component></navigation-component>
                 <form-component></form-component>
-            `
-        } else if(hash?.includes('#/home')){
-            mainDiv.innerHTML = `
-                <navigation-component></navigation-component>
-                <list-component></list-component>
-            `
-            window.location.hash = '#/home'
+            `;
         } else {
-            debugger;
             const randomErrorComponent = await this.getRandomComponent();
             mainDiv.innerHTML = `
                 <navigation-component></navigation-component>
                 <${randomErrorComponent}></${randomErrorComponent}>
-            `
-            window.location.hash = '#/404'
+            `;
+            window.location.hash = '#/404';
         }
         this.shadowRoot!.appendChild(mainDiv);
     }
