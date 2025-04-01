@@ -103,7 +103,7 @@ export default class ErrorPageComponentJe extends HTMLElement {
                 <div class="container">
                     <span class="text">PAGE NOT FOUND</span>
                     <span class="numb">404</span>
-                    <a href="/">
+                    <a href="#/home">
                         <button class="btn">Back Home</button>
                     </a>
                 </div>

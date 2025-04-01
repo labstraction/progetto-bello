@@ -106,7 +106,7 @@ export default class ErrorPageComponentLo extends HTMLElement {
                     <h1>Oops!</h1>
                     <h2>404</h2>
                     <p>Page Not Found</p>
-                    <a href="/">Go Back Home</a>
+                    <a href="#/home">Go Back Home</a>
                 </div>
             </div>
         `;
