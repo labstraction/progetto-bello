@@ -99,8 +99,7 @@ export default class TodoService {
         return this.todos;
     }
 
-    makeTodosDone(event: Event, id: string) {
-        event.preventDefault();
+    makeTodosDone( id: string) {
         const todo = this.findTodosRec(this.todos, id);
         if (todo) {
             todo.isDone = true;

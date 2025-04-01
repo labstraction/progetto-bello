@@ -17,6 +17,7 @@ export default class ListComponent extends HTMLElement{
         super();
         this.attachShadow({mode: 'open'});
         this.todoService = TodoService.getInstance();
+        
     }
 
     connectedCallback(){
@@ -24,6 +25,15 @@ export default class ListComponent extends HTMLElement{
         this.parseNewTodo();
         this.render(window.location.hash);
 		this.eventListener(); // chiamo anche eventListener
+
+        document.addEventListener('todos-done', (event) => {
+            const myEvent = event  as CustomEvent
+            myEvent.preventDefault()
+            console.log('ascoltando dall connected')
+            const todoId = myEvent.detail;
+            this.todoService.makeTodosDone(todoId);
+            this.render(window.location.hash);
+        })
     }
 
     styling(){
@@ -94,50 +104,7 @@ export default class ListComponent extends HTMLElement{
         this.shadowRoot!.appendChild(style);
     }
 
-    // render(hash?: string) {
-    //     // Rimuovo tutto tranne il <style>
-    //     Array.from(this.shadowRoot!.children).forEach(child => {
-    //         if (!(child instanceof HTMLStyleElement)) {
-    //             this.shadowRoot!.removeChild(child);
-    //         }
-    //     });
     
-    //     const mainDiv = document.createElement('div');
-    //     mainDiv.id = 'list-container';
-    //     mainDiv.classList.add('list-container');
-    
-    //     const todos = this.todoService.todos;
-    
-    //     todos.forEach((todo) => {
-    //         const cardDiv = document.createElement('a');
-    //         cardDiv.classList.add('card-container');
-    //         cardDiv.href = `#/detail?id=${todo.id}`;
-    
-    //         const card = new CardComponent();
-    //         card.setAttribute('todos', JSON.stringify(todo));
-    //         cardDiv.appendChild(card);
-    //         mainDiv.appendChild(cardDiv);
-    //     });
-    
-    //     this.shadowRoot!.appendChild(mainDiv);
-    
-    //     const footer = document.createElement('div');
-    //     footer.id = 'footer';
-    //     footer.classList.add('footer');
-    
-    //     const link = document.createElement('a');
-    //     link.href = hash?.includes('#/detail')
-    //         ? `./#/new?id=${window.location.hash.replace("#/detail?id=", "")}`
-    //         : './#/new';
-    
-    //     const addBtn = document.createElement('button');
-    //     addBtn.classList.add('add-button-newTask');
-    //     addBtn.textContent = hash?.includes('#/detail') ? 'NUOVO SUBTASK' : 'NUOVO TASK';
-    
-    //     link.appendChild(addBtn);
-    //     footer.appendChild(link);
-    //     this.shadowRoot!.appendChild(footer);
-    // }
     
 
     render(hash?: string){
@@ -218,11 +185,13 @@ export default class ListComponent extends HTMLElement{
 			this.render();
 		});
 
-		document.addEventListener('todos-done', (event: any) => {
-			const todoId = event.detail;
-			this.todoService.makeTodosDone(event, todoId);
-			this.render();
-		});
+		// document.addEventListener('todos-done', (event: CustomEvent<string>) => {
+
+        //     console.log('siamo nel listerner della list')
+		// 	const todoId = event.detail;
+		// 	this.todoService.makeTodosDone(todoId);
+		// 	this.render();
+		// });
 	}
 
     parseNewTodo(){
