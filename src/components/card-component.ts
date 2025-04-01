@@ -55,18 +55,30 @@ export default class CardComponent extends HTMLElement {
         box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.2);
         margin-bottom: 0.5rem;
         display: grid;
+        overflow: hidden;
+        height: 90px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         grid-template-columns: 3fr 2fr;
       }
 
       .task-txt-info{
         display: flex;
+        margin-left: 5px;
+        margin-right: 40px;
       }
 
       .task-summary {
-        color: #222;
-        font-weight: light;
-        display: block;
-        max-width:100%;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-word;
+        white-space: normal; 
+        max-width: 100%;
         text-decoration: ${this.todos.isDone ? 'line-through': 'none'}
       }
 

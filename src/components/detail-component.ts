@@ -68,15 +68,10 @@ export default class DetailComponent extends HTMLElement{
             @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Signika+Negative:wght@300..700&display=swap');
 
             #detail-container {
-                font-family:"Signika Negative", sans-serif;
+                font-family: "Signika Negative", sans-serif;
                 text-transform: capitalize;
-            }
-
-            .add-subtask{
-                width: 100%;
-                position: absolute;
-                bottom: 0;
-                text-align: center;
+                padding: 1rem;
+                box-sizing: border-box;
             }
 
             .task-detail {
@@ -100,7 +95,9 @@ export default class DetailComponent extends HTMLElement{
                 min-height: 50px;
                 max-height: 50px;
                 display: flex;
-                justify-content: space-between;
+                justify-content: center;
+                align-content: space-between;
+                flex-wrap: wrap;
             }
 
             .task-priority{
@@ -109,19 +106,48 @@ export default class DetailComponent extends HTMLElement{
                 border-radius: 2rem;
                 box-sizing: border-box;
                 height: 100%;
+                flex: 1;
+                max-width: 50px;
             }
 
             .clock-img {
                 height: 100%;
-                fill: white;
+                max-width: 100%;
+                object-fit: contain;
             }
 
-            .task-date{
+            .task-date {
                 font-weight: bold;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 font-size: smaller;
+                flex: 2;
+                min-width: 150px;
+                align-items: self-end;
+            }
+
+            /* Media query for smaller screens */
+            @media (max-width: 600px) {
+                .task-detail {
+                    grid-template-rows: auto auto;
+                    padding: 0.5rem;
+                }
+
+                .task-priority-date {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .task-priority {
+                    margin-bottom: 0.5rem;
+                    max-width: 100%;
+                }
+
+                .task-date {
+                    font-size: smaller;
+                    min-width: auto;
+                }
             }
         `
         this.shadowRoot!.appendChild(style);
@@ -141,34 +167,29 @@ export default class DetailComponent extends HTMLElement{
         let terminationDateString = "";
         if(this.selectedTodo.terminationDate){
             terminationDateString = new Date(this.selectedTodo.terminationDate).toLocaleString();
+        } else {
+            terminationDateString = 'N/A'
         }
 
         mainDiv.innerHTML = `
             <div class="task-detail">
-                <div class="task-description">
                      <span class="task-description">
                     ${this.selectedTodo.description}
                     </span>
-                </div>
 
                 <div class="task-priority-date">
                     <div class="task-priority">
                         <img class="clock-img" src="${this.todoImage}" alt="">
                     </div>
                     <div class="task-date">
-                        <span>creation date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${creationDateString.slice(0,17)}</span>
-                        <span>expiration date:&nbsp;&nbsp;${terminationDateString.slice(0,17)}</span>
+                        <span>creation date: ${creationDateString.slice(0,17)}</span>
+                        <span>expiration date: ${terminationDateString.slice(0,17)}</span>
                     </div>
                 </div>
             </div>
             
             
         `;
-        // <div class="add-subtask">
-        //         <button class="add-btn" id="add-btn">+</button>
-        //  </div>
-        //
-        //button per nuovo subTask, modificare form-component, passara id di task
 
         this.shadowRoot!.appendChild(mainDiv);
     }
