@@ -17,7 +17,7 @@ export default class RouterComponent extends HTMLElement{
         const componentFiles = [
             'error-page-component-lo',
             'error-page-component-ja',
-            'error-page-404'
+            'error-page-component-eu'
         ];
         const randomIndex = Math.floor(Math.random() * componentFiles.length);
         const randomFile = componentFiles[randomIndex];

@@ -21,7 +21,7 @@ export default class ListComponent extends HTMLElement{
     connectedCallback(){
         this.styling();
         this.parseNewTodo();
-        this.render();
+        this.render(window.location.hash);
 		this.eventListener(); // chiamo anche eventListener
     }
 
@@ -115,13 +115,20 @@ export default class ListComponent extends HTMLElement{
             footer = document.createElement('div');
             footer.id = 'footer';
             footer.classList.add('footer');
-    
+
             const link = document.createElement('a');
-            link.href = './#/new';
+            if(hash!.includes('#/detail')){
+                const hashLink = window.location.hash;
+                const todoId = hashLink.replace("#/detail?id=", "");
+                link.href = `./#/new?id=${todoId}`;
+            } else {
+                link.href = './#/new';
+            }
+            
             const addBtn = document.createElement('button');
             addBtn.classList.add('add-button-newTask');
     
-            if (hash === '#/detail') {
+            if (hash!.includes('#/detail')) {
                 const AddNode = document.createTextNode('NUOVO SUBTASK');
                 addBtn.appendChild(AddNode);
             } else {
@@ -137,7 +144,6 @@ export default class ListComponent extends HTMLElement{
 
 	eventListener(){ // gestisce changeOrder e makeTodosDone
 		document.addEventListener('change-order', () => {
-            debugger;
 			this.todoService.changeOrder();
 			this.render();
 		});
