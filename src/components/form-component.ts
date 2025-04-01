@@ -213,7 +213,6 @@ export default class FormComponent extends HTMLElement {
     confirmForm() {
         const form: HTMLFormElement = this.shadowRoot!.getElementById("form") as HTMLFormElement;
         const data = new FormData(form);
-        debugger;
         const creationDate = new Date().getTime();
         const description: string = data.get("description") as string;
         const firstWord = description.trim().split(/\s+/)[0];

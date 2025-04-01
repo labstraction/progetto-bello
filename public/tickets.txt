@@ -8,7 +8,7 @@
 
 -DONE nel dettaglio si può aggiungere il subtask (lorenzo/eusebio/jeremias)
 
-- implementare logiche di completamento (jan/hugo)
+- DONE implementare logiche di completamento (jan/hugo)
 
 -DONE scurire il testo della description (fanciulle)
 
