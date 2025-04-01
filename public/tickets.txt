@@ -1,8 +1,8 @@
 
-- spostare tasto "nuovo task" nel componente lista e 
+-DONE spostare tasto "nuovo task" nel componente lista e 
   renderlo come barra in fondo all'applicazione (a tutta larghezza) (fanciulle)
 
-- DONE aggiustare ordinamento per scadenza (andrea)
+-DONE aggiustare ordinamento per scadenza (andrea)
 
 - nuovo task: tasto salva e annulla in fondo mantenere un sfondo di stacco dal bianco (jan/hugo)
 
@@ -28,4 +28,4 @@
 
 -DONE rimuovere riferimenti a cartella public (fanciulle)
 
-- fare in modo che il tasto 'nuovo task' non copra  i todo (fanciulle)
+-DONE fare in modo che il tasto 'nuovo task' non copra  i todo (fanciulle)

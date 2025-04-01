@@ -204,7 +204,7 @@ export default class CardComponent extends HTMLElement {
     }
     doneBtn.addEventListener("click", (event) => this.todoService.makeTodosDone(event, this.todos.id));
     const doneIcon = document.createElement("img");
-    doneIcon.src = "../public/check-double-svgrepo-com.svg";
+    doneIcon.src = "../check-double-svgrepo-com.svg";
     doneIcon.alt = "done";
     doneIcon.classList.add("done-icon");
 
