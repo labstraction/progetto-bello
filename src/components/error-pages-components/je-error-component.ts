@@ -117,7 +117,7 @@ export default class ErrorPageComponentJe extends HTMLElement {
         let entities: Tear[] = [];
         let canvas: HTMLCanvasElement;
         let ctx: CanvasRenderingContext2D;
-        canvas = document.getElementById('my-canvas') as HTMLCanvasElement;
+        canvas = this.shadowRoot!.getElementById('my-canvas') as HTMLCanvasElement;
         ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
         ctx.canvas.width = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
