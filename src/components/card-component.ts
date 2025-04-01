@@ -40,14 +40,15 @@ export default class CardComponent extends HTMLElement {
       default:
         return '#ff6666'
     }
-
-
-    return
   }
 
   styling() {
     const style = document.createElement("style");
     style.innerText = `
+      .card-container {
+        background-color: ${this.todos.isDone ? '#EFEFEF': 'white'}
+      }
+
       .task-container {
         padding: 1.25rem;
         border-radius: 1rem;
@@ -66,6 +67,7 @@ export default class CardComponent extends HTMLElement {
         font-weight: light;
         display: block;
         max-width:100%;
+        text-decoration: ${this.todos.isDone ? 'line-through': 'none'}
       }
 
       .task-icon-info {
@@ -90,7 +92,7 @@ export default class CardComponent extends HTMLElement {
         padding: 0.4rem;
         height: 2rem;
         margin-bottom: 1rem;
-	      background-color: ${this.priorityColor};
+	      background-color: ${this.todos.isDone ? 'rgb(139, 139, 139)' :this.priorityColor};
 	      border-radius: 2rem;
         display: flex;
         align-items: center;
@@ -105,8 +107,8 @@ export default class CardComponent extends HTMLElement {
         border: none;
       }
 
-      .done-icon-container.done {
-        background-color: green;
+      .done-icon-container {
+        
         border-radius: 50%;
       }
 
@@ -172,6 +174,7 @@ export default class CardComponent extends HTMLElement {
       mainDiv = document.createElement("div");
       mainDiv.id = "card-container";
     }
+    mainDiv.classList.add('card-container')
 
     const { label, value } = this.getRemainingTime()
 
