@@ -16,7 +16,7 @@
 
 - implementare flusso di creazione del subtodo (jan/hugo) passiamo l'id del task nell'url del newsubtask quando siamo nel detail
 
-- riorganizzare card todo e testo max 3 lines (fanciulle)
+-DONE riorganizzare card todo e testo max 3 lines (fanciulle)
 
 -DONE description è required (jan/hugo)
 
@@ -28,4 +28,4 @@
 
 -DONE rimuovere riferimenti a cartella public (fanciulle)
 
-- fare in modo che il tasto 'nuovo task' non copra  i todo (fanciulle)
+-DONE fare in modo che il tasto 'nuovo task' non copra  i todo (fanciulle)
