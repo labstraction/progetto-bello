@@ -18,7 +18,7 @@
 
 - riorganizzare card todo e testo max 3 lines (fanciulle)
 
-- description è required (jan/hugo)
+-DONE description è required (jan/hugo)
 
 -DONE correggere routing
 

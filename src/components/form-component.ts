@@ -50,6 +50,10 @@ export default class FormComponent extends HTMLElement {
 
         }
 
+        // #form{
+        //     height: 80vh;
+        // }
+
         h3 {
             font-family: "Signika Negative", sans-serif;
             font-weight: 300;
@@ -110,20 +114,26 @@ export default class FormComponent extends HTMLElement {
         }
 
         .button-container {
+            position: absolute;
+            bottom: 5%;
+            left:0;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             gap: 50px;
-            margin-top: 24px;
+            // margin-top: 24px;
+            align-items: center;
+            width: 100%;
         }
 
         button {
             display: block;
-            width: 100%;
+            width: 15%;
             margin-top: 12px;
             padding: 8px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
+            box-sizing: border-box;
         }
 
         #cancel {
