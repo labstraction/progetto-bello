@@ -1,3 +1,14 @@
+interface Tear {
+    respawn?: boolean,
+    height?: number,
+    width?: number,
+    originX?: number,
+    originY?: number,
+    color?: string,
+    speedX?: number,
+    speedY?: number
+}
+
 export default class ErrorPageComponentJe extends HTMLElement {
     constructor() {
         super();
@@ -92,7 +103,9 @@ export default class ErrorPageComponentJe extends HTMLElement {
                 <div class="container">
                     <span class="text">PAGE NOT FOUND</span>
                     <span class="numb">404</span>
-                    <button class="btn" href="/">Back Home</button>
+                    <a href="/">
+                        <button class="btn">Back Home</button>
+                    </a>
                 </div>
         `;
 
@@ -101,11 +114,11 @@ export default class ErrorPageComponentJe extends HTMLElement {
 
     canvasScript(){
     
-        let entities = [];
-        let canvas;
-        let ctx;
-        canvas = document.getElementById('my-canvas');
-        ctx = canvas.getContext('2d');
+        let entities: Tear[] = [];
+        let canvas: HTMLCanvasElement;
+        let ctx: CanvasRenderingContext2D;
+        canvas = document.getElementById('my-canvas') as HTMLCanvasElement;
+        ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
         ctx.canvas.width = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
     
@@ -113,7 +126,7 @@ export default class ErrorPageComponentJe extends HTMLElement {
     
         function setUp() {
             for (let i = 0; i < 100; i++) {
-                const tear = {};
+                const tear: Tear = {};
     
                 //lacrima se deve respawnare
                 tear.respawn = true;
@@ -139,15 +152,15 @@ export default class ErrorPageComponentJe extends HTMLElement {
     
         function update() {
             for (let i = 0; i < entities.length; i++) {
-                const tear = entities[i];
+                const tear: Tear = entities[i];
     
-                tear.originY += tear.speedY;
-                tear.originX += tear.speedX;
+                tear.originY! += tear.speedY!;
+                tear.originX! += tear.speedX!;
     
                 //RESPAWN
     
                 //resetto la lacrima
-                if (tear.originY > canvas.height && tear.respawn) {
+                if (tear.originY! > canvas.height && tear.respawn) {
                     tear.originX = Math.random() * canvas.width;
                     tear.originY = Math.random() * -canvas.height;
                     tear.speedX = 0;
@@ -159,13 +172,13 @@ export default class ErrorPageComponentJe extends HTMLElement {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
     
             for (let i = 0; i < entities.length; i++) {
-                const tear = entities[i];
-                ctx.fillStyle = tear.color;
-                ctx.fillRect(tear.originX, tear.originY, tear.width, tear.height);
+                const tear: Tear = entities[i];
+                ctx.fillStyle = tear.color!;
+                ctx.fillRect(tear.originX!, tear.originY!, tear.width!, tear.height!);
             }
         }
     
-        function gameLoop(elapsedTime) {
+        function gameLoop() {
     
             update();
     
@@ -182,7 +195,7 @@ export default class ErrorPageComponentJe extends HTMLElement {
     
         start();
     
-        function createBigTear(event) {
+        function createBigTear(event: TouchEvent) {
             // Ottieni l'ultimo tocco dalla lista changedTouches
             let touch = event.changedTouches[0];
     
@@ -190,7 +203,7 @@ export default class ErrorPageComponentJe extends HTMLElement {
             let x = touch.clientX;
             let y = touch.clientY;
     
-            const tear = {};
+            const tear: Tear = {};
             //non respawna
             tear.respawn = false;
     

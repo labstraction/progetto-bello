@@ -1,59 +1,67 @@
-export default class ErrorPageComponentla extends HTMLElement {
+export default class ErrorPageComponentLa extends HTMLElement {
     constructor() {
         super();
+        this.attachShadow({ mode: 'open' });
+    }
 
-        // Creazione dello Shadow DOM
-        const shadow = this.attachShadow({ mode: 'open' });
+    connectedCallback() {
+        this.render();
+        this.styling();
+    }
 
-        // Struttura HTML
-        const template = document.createElement('template');
-        template.innerHTML = `
-            <style>
-                body {
-                    margin: 0;
-                    padding: 0;
-                    font-family: "Signika Negative", sans-serif;
-                    background-color: #f9f9f9;
-                    color: #333;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100vh;
-                    text-align: center;
-                }
+    styling() {
+        const style = document.createElement('style');
+        style.innerText = `
+            :host {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                text-align: center;
+                font-family: "Signika Negative", sans-serif;
+                background-color: #f9f9f9;
+                color: #333;
+            }
 
-                h1 {
-                    font-size: 5rem;
-                    margin: 0;
-                }
+            h1 {
+                font-size: 5rem;
+                margin: 0;
+            }
 
-                p {
-                    font-size: 1.5rem;
-                    margin: 10px 0 30px;
-                }
+            p {
+                font-size: 1.5rem;
+                margin: 10px 0 30px;
+            }
 
-                img {
-                    max-width: 300px;
-                    height: auto;
-                    border-radius: 8px;
-                }
+            img {
+                max-width: 300px;
+                height: auto;
+                border-radius: 8px;
+            }
 
-                a {
-                    margin-top: 20px;
-                    display: inline-block;
-                    padding: 10px 20px;
-                    background-color: #00d6c6;
-                    color: white;
-                    text-decoration: none;
-                    border-radius: 5px;
-                    transition: background-color 0.2s;
-                }
+            a {
+                margin-top: 20px;
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #00d6c6;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.2s;
+            }
 
-                a:hover {
-                    background-color: #00b3a6;
-                }
-            </style>
+            a:hover {
+                background-color: #00b3a6;
+            }
+        `;
+        this.shadowRoot!.appendChild(style);
+    }
+
+    render() {
+        const mainDiv = this.shadowRoot!.getElementById('app') || document.createElement('div');
+        mainDiv.id = 'app';
+        mainDiv.innerHTML = `
             <div>
                 <h1>404</h1>
                 <p>Oops! Pagina non trovata.</p>
@@ -62,11 +70,8 @@ export default class ErrorPageComponentla extends HTMLElement {
                 <a href="/">Torna alla home</a>
             </div>
         `;
-
-        // Aggiunta del contenuto al Shadow DOM
-        shadow.appendChild(template.content.cloneNode(true));
+        this.shadowRoot!.appendChild(mainDiv);
     }
 }
 
-// Registrazione del Web Component
-customElements.define('error-page-component-la', ErrorPageComponentla);
+customElements.define('error-page-component-la', ErrorPageComponentLa);
