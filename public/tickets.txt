@@ -6,7 +6,7 @@
 
 - nuovo task: tasto salva e annulla in fondo mantenere un sfondo di stacco dal bianco (jan/hugo)
 
-- DONE nel dettaglio si può aggiungere il subtask (lorenzo/eusebio/jeremias)
+-DONE nel dettaglio si può aggiungere il subtask (lorenzo/eusebio/jeremias)
 
 - implementare logiche di completamento (jan/hugo)
 
