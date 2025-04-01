@@ -118,20 +118,24 @@ export default class TodoService {
     }
 
     findTodosRec(todosArray: Todos[], todosId: string): Todos | null{
+
         for (let i = 0; i < todosArray.length; i++) {
             const todos = todosArray[i];
 
             if(todosId === todos.id){
                 return todos;
             } else {
+
                 if(todos.subTodosArray && todos.subTodosArray.length > 0){
                     const sub =  this.findTodosRec(todos.subTodosArray, todosId)
                     if (sub) {
                         return sub;
                     }
                 }
+                
             }
         }
+
         return null;
     }
 
