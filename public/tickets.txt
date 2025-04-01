@@ -1,32 +1,31 @@
-- creare pagina dettaglio (lorenzo / jeremias / eusebio)
 
-- creare icona (simil logo) e metterla al suo posto (sara / giovanni) DONE
+- spostare tasto "nuovo task" nel componente lista e 
+  renderlo come barra in fondo all'applicazione (a tutta larghezza) (fanciulle)
 
-- nome applicazione sX (sara / giovanni) DONE
+- DONE aggiustare ordinamento per scadenza (andrea)
 
-- sostituzione icona settings con un sort (sara / giovanni) DONE
+- nuovo task: tasto salva e annulla in fondo mantenere un sfondo di stacco dal bianco (jan/hugo)
 
-- diminuire margin delle card (laterale e tra loro) (jan / laura) DONE
+- nel dettaglio si può aggiungere il subtask (lorenzo/eusebio/jeremias)
 
-- togliere "task title mockup" e sostituire con description (jan / laura) DONE
+- implementare logiche di completamento (jan/hugo)
 
-- spostare icone orologio dentro la chips con il countdown (jan / laura) DONE
+- scurire il testo della description (fanciulle)
 
-- rimuovere zero quando non c'è scadenza (jan / laura) DONE
+- pagina di dettaglio da migliorare graficamente e con lista dei subtodo (nel dettaglio voglio anche il numero dei subtodo) (lorenzo/eusebio/jeremias)
 
-- spostare tasto "nuovo task" nel componente lista e renderlo come barra in fondo all'applicazione (a tutta larghezza) (sara / giovanni) DONE
+- implementare flusso di creazione del subtodo (jan/hugo)
 
-- aggiustare ordinamento per scadenza (sara / giovanni)
+- riorganizzare card todo e testo max 3 lines (fanciulle)
 
-- rimuovere effetto dialog al nuovo task (togliamo ombra, togliere bordo, togliere angoli, dare un po' di margine in alto) tasto salva e annulla in fondo (jan / laura) DONE
+- description è required (jan/hugo)
 
-- nel dettaglio si può aggiungere il subtask (lorenzo / jeremias / eusebio)
+-DONE correggere routing
 
-- aggiungere check completamento sulla card (in home) e implementare logiche di completamento (jan / laura)
+- caricare altre 404 (fanciulle)
 
+- caricare su pages (andrea)
 
-compiti:
+-DONE rimuovere riferimenti a cartella public (fanciulle)
 
--finire i ticket di stamattina
--trasformare le pagine 404 in web component
--studiare typescript DONE
+- fare in modo che il tasto 'nuovo task' non copra  i todo (fanciulle)
