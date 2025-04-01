@@ -5,6 +5,7 @@
 // controllerà i query params dell'url, se tra i query params c'è la key 'newTodo' parserà il json ad essa associato e chiamerà il servizio aggiungendo il nuovo todo
 // ascolterà l'evento todos-done e chiama una funzione del service che mette a done il todo.
 
+import Todos from '../model/todo';
 import TodoService from '../services/todo-service';
 import CardComponent from './card-component';
 
@@ -35,6 +36,7 @@ export default class ListComponent extends HTMLElement{
 			text-decoration: none;
 			font-family: 'DM Sans', sans-serif;
 		}
+        
 
 		.list-container {
 			display: flex;
@@ -42,8 +44,8 @@ export default class ListComponent extends HTMLElement{
 			gap: 0.4rem;
 			padding: 0.4rem;
 			background-color: #f9f9f9;
-            min-height: calc(100vh - 60px); /* Spazio per il footer */
             box-sizing: border-box;
+            padding: 100px;
 		}
 
         .footer {
@@ -93,9 +95,23 @@ export default class ListComponent extends HTMLElement{
         }
         mainDiv.classList.add('list-container');
 
-        const todos = this.todoService.todos;
+        let todos: Todos[];
+        if(hash!.includes('#/detail')){
+            const hashLink = window.location.hash;
+            const todoId = hashLink.replace("#/detail?id=", "");
+            const service = TodoService.getInstance();
+            const selectedTodo = service.findTodosRec(service.todos, todoId) as Todos;
+            if(selectedTodo.subTodosArray){
+                todos = selectedTodo.subTodosArray;
+            } else {
+                todos = [];
+            }
+            
+        } else {
+            todos = this.todoService.todos;
+        }
 
-        todos.forEach((todo) => {
+        todos!.forEach((todo) => {
             const cardDiv = document.createElement('a');
             cardDiv.classList.add('card-container');
             cardDiv.href = `#/detail?id=${todo.id}`; //assegna link id di todo con interpolata
@@ -111,7 +127,6 @@ export default class ListComponent extends HTMLElement{
 
         //crea il footer
         let footer = this.shadowRoot!.getElementById('footer');
-        if (!footer) {
             footer = document.createElement('div');
             footer.id = 'footer';
             footer.classList.add('footer');
@@ -140,7 +155,6 @@ export default class ListComponent extends HTMLElement{
             footer.appendChild(link);
     
             this.shadowRoot!.appendChild(footer);
-        }
     }
 
 	eventListener(){ // gestisce changeOrder e makeTodosDone
