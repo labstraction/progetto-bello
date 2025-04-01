@@ -39,14 +39,13 @@ export default class FormComponent extends HTMLElement {
         }
 
         #form-container {
+            margin-top: 4%;
             font-family:"Signika Negative", sans-serif;
             padding: 16px;
-            /* border: 1px solid #ccc; */
-           /*  border-radius: 8px; */
-            
-          max-width: 400px; 
+            background-color: #EFEFEF;
+            max-width: 400px; 
             margin: auto;
-           /*  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+            margin-top: 3%;
 
         }
 
@@ -127,7 +126,8 @@ export default class FormComponent extends HTMLElement {
 
         button {
             display: block;
-            width: 15%;
+
+            min-width: 8rem;
             margin-top: 12px;
             padding: 8px;
             border: none;
