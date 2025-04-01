@@ -35,6 +35,7 @@ export default class ListComponent extends HTMLElement{
 			text-decoration: none;
 			font-family: 'DM Sans', sans-serif;
 		}
+        
 
 		.list-container {
 			display: flex;
@@ -42,8 +43,8 @@ export default class ListComponent extends HTMLElement{
 			gap: 0.4rem;
 			padding: 0.4rem;
 			background-color: #f9f9f9;
-            min-height: calc(100vh - 60px); /* Spazio per il footer */
             box-sizing: border-box;
+            padding: 100px;
 		}
 
         .footer {
@@ -111,7 +112,6 @@ export default class ListComponent extends HTMLElement{
 
         //crea il footer
         let footer = this.shadowRoot!.getElementById('footer');
-        if (!footer) {
             footer = document.createElement('div');
             footer.id = 'footer';
             footer.classList.add('footer');
@@ -133,7 +133,6 @@ export default class ListComponent extends HTMLElement{
             footer.appendChild(link);
     
             this.shadowRoot!.appendChild(footer);
-        }
     }
 
 	eventListener(){ // gestisce changeOrder e makeTodosDone
