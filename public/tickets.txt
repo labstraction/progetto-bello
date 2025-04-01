@@ -1,32 +1,27 @@
-- creare pagina dettaglio (lorenzo / jeremias / eusebio)
 
-- creare icona (simil logo) e metterla al suo posto (sara / giovanni) DONE
+- spostare tasto "nuovo task" nel componente lista e 
+  renderlo come barra in fondo all'applicazione (a tutta larghezza)
 
-- nome applicazione sX (sara / giovanni) DONE
+- aggiustare ordinamento per scadenza
 
-- sostituzione icona settings con un sort (sara / giovanni) DONE
+- nuovo task: tasto salva e annulla in fondo mantenere un sfondo di stacco dal bianco
 
-- diminuire margin delle card (laterale e tra loro) (jan / laura) DONE
+- nel dettaglio si può aggiungere il subtask
 
-- togliere "task title mockup" e sostituire con description (jan / laura) DONE
+- implementare logiche di completamento
 
-- spostare icone orologio dentro la chips con il countdown (jan / laura) DONE
+- scurire il testo della description
 
-- rimuovere zero quando non c'è scadenza (jan / laura) DONE
+- pagina di dettaglio da migliorare graficamente e con lista dei subtodo
 
-- spostare tasto "nuovo task" nel componente lista e renderlo come barra in fondo all'applicazione (a tutta larghezza) (sara / giovanni) DONE
+- implementare flusso di creazione del subtodo
 
-- aggiustare ordinamento per scadenza (sara / giovanni)
+- riorganizzare card todo e testo max 3 lines
 
-- rimuovere effetto dialog al nuovo task (togliamo ombra, togliere bordo, togliere angoli, dare un po' di margine in alto) tasto salva e annulla in fondo (jan / laura) DONE
+- description è required
 
-- nel dettaglio si può aggiungere il subtask (lorenzo / jeremias / eusebio)
+- correggere routing
 
-- aggiungere check completamento sulla card (in home) e implementare logiche di completamento (jan / laura)
+- caricare altre 404
 
-
-compiti:
-
--finire i ticket di stamattina
--trasformare le pagine 404 in web component
--studiare typescript DONE
+- caricare su pages (andrea)
