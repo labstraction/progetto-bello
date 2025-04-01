@@ -88,7 +88,7 @@ export default class FormComponent extends HTMLElement {
             height: 150px;
             width: 100%;
             resize: none;
-            padding: 8px, 12px;
+            padding: 8px 12px;
             font-size: 0.9rem;
             border: 1px solid #ccc;
             border-radius: 8px;
@@ -154,25 +154,31 @@ export default class FormComponent extends HTMLElement {
         const offset = now.getTimezoneOffset();
         const localDate = new Date(now.getTime() - offset * 60 * 1000);
         const minDate = localDate.toISOString().slice(0, 16);
-        mainDiv.innerHTML = `
-        <form id="form">
+        const form: HTMLFormElement = document.createElement('form')
+        form.id = 'form'
+        form.addEventListener('submit', (event) =>  {
+            event.preventDefault()
+            this.confirmForm()
+        })
+        form.innerHTML = `
+
         <h3>seleziona il grado di priorità</h3>
             <div class="priority-group">
-                <input type="radio" id="priority-0" name="priorityValue" value="0" checked required>
+                <input type="radio" id="priority-0" name="priorityValue" value="0" checked >
                 <label for="priority-0" class="color-label" style="background-color: var(--priority-0);"></label>
 
-                <input type="radio" id="priority-1" name="priorityValue" value="1" required>
+                <input type="radio" id="priority-1" name="priorityValue" value="1" > 
                 <label for="priority-1" class="color-label" style="background-color: var(--priority-1);"></label>
 
-                <input type="radio" id="priority-2" name="priorityValue" value="2" required>
+                <input type="radio" id="priority-2" name="priorityValue" value="2" >
                 <label for="priority-2" class="color-label" style="background-color: var(--priority-2);"></label>
 
-                <input type="radio" id="priority-3" name="priorityValue" value="3" required>
+                <input type="radio" id="priority-3" name="priorityValue" value="3" >
                 <label for="priority-3" class="color-label" style="background-color: var(--priority-3);"></label>
             </div>
             <div class="description-area">
             <label for="description"><h3>descrivi qui il tuo task</h3></label>
-            <textarea name="description" id="description" required></textarea>
+            <textarea name="description" id="description" required minlength="1"></textarea>
             </div>
 
             <label for="terminationDate"><h3>entro quando? (facoltativo)</h3></label>
@@ -183,27 +189,22 @@ export default class FormComponent extends HTMLElement {
             <button id="confirm">salva</button>
             </div>
 
-        </form>
         `;
-
+        mainDiv.appendChild(form)
         this.shadowRoot!.appendChild(mainDiv);
 
         const cancelBtn = this.shadowRoot!.getElementById("cancel") as HTMLButtonElement
-        cancelBtn.addEventListener("click", (e) => this.cancelForm(e))
-
-        const confirmBtn = this.shadowRoot!.getElementById("confirm") as HTMLButtonElement
-        confirmBtn.addEventListener("click", (e) => this.confirmForm(e))
+        cancelBtn.addEventListener("click", () => this.cancelForm())
     }
 
-    cancelForm(e: Event) {
-        e.preventDefault();
+    cancelForm() {
         window.location.href = "/#/home/";
     }
 
-    confirmForm(e: Event) {
-        e.preventDefault();
+    confirmForm() {
         const form: HTMLFormElement = this.shadowRoot!.getElementById("form") as HTMLFormElement;
         const data = new FormData(form);
+        debugger;
         const creationDate = new Date().getTime();
         const description: string = data.get("description") as string;
         const firstWord = description.trim().split(/\s+/)[0];
