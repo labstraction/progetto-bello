@@ -107,7 +107,7 @@ export default class ListComponent extends HTMLElement{
     
     
 
-    render(hash?: string){
+    render(hash?: string = window.location.hash){ //inizializzo hash così sa cosa ci deve fare
         let mainDiv = this.shadowRoot!.getElementById('list-container');
         if (mainDiv) {
             mainDiv.innerHTML = '';
