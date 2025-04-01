@@ -5,6 +5,7 @@
 // controllerà i query params dell'url, se tra i query params c'è la key 'newTodo' parserà il json ad essa associato e chiamerà il servizio aggiungendo il nuovo todo
 // ascolterà l'evento todos-done e chiama una funzione del service che mette a done il todo.
 
+import Todos from '../model/todo';
 import TodoService from '../services/todo-service';
 import CardComponent from './card-component';
 
@@ -93,9 +94,23 @@ export default class ListComponent extends HTMLElement{
         }
         mainDiv.classList.add('list-container');
 
-        const todos = this.todoService.todos;
+        let todos: Todos[];
+        if(hash!.includes('#/detail')){
+            const hashLink = window.location.hash;
+            const todoId = hashLink.replace("#/detail?id=", "");
+            const service = TodoService.getInstance();
+            const selectedTodo = service.findTodosRec(service.todos, todoId) as Todos;
+            if(selectedTodo.subTodosArray){
+                todos = selectedTodo.subTodosArray;
+            } else {
+                todos = [];
+            }
+            
+        } else {
+            todos = this.todoService.todos;
+        }
 
-        todos.forEach((todo) => {
+        todos!.forEach((todo) => {
             const cardDiv = document.createElement('a');
             cardDiv.classList.add('card-container');
             cardDiv.href = `#/detail?id=${todo.id}`; //assegna link id di todo con interpolata
