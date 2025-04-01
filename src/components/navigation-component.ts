@@ -140,7 +140,6 @@ export default class NavigationComponent extends HTMLElement{
 
     dispatchChangeOrder(): any {
         const event = new CustomEvent(`change-order`);
-        console.log(event);
         document.dispatchEvent(event);
     }
 

@@ -16,7 +16,8 @@ export default class RouterComponent extends HTMLElement{
     async getRandomComponent() {
         const componentFiles = [
             'error-page-component-lo',
-            'error-page-component-ja'
+            'error-page-component-ja',
+            'error-page-404'
         ];
         const randomIndex = Math.floor(Math.random() * componentFiles.length);
         const randomFile = componentFiles[randomIndex];

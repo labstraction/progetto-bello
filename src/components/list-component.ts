@@ -139,14 +139,14 @@ export default class ListComponent extends HTMLElement{
 
 	eventListener(){ // gestisce changeOrder e makeTodosDone
 		document.addEventListener('change-order', () => {
-            console.log('change-order event received');
+            debugger;
 			this.todoService.changeOrder();
 			this.render();
 		});
 
 		document.addEventListener('todos-done', (event: any) => {
 			const todoId = event.detail;
-			this.todoService.makeTodosDone(todoId);
+			this.todoService.makeTodosDone(event, todoId);
 			this.render();
 		});
 	}
