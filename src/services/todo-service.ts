@@ -33,8 +33,6 @@ export default class TodoService {
     }
 
     changeOrder() {
-		console.log('isPriorityOrder:', this.isPriorityOrder);
-		console.log('Before changeOrder:', this.todos);
 		if (this.isPriorityOrder) {
             this.isPriorityOrder = false;
             this.todos = this.orderTodosByTermination(this.todos);
@@ -42,27 +40,28 @@ export default class TodoService {
             this.isPriorityOrder = true; //trovato il problema: siccome le card vengono sempre impostate in ordine di priorità, questo sarà sempre true e dunque sort non funzionerà
             this.todos = this.orderTodosByPriority(this.todos)
         }
-        console.log('After changeOrder:', this.todos);
+
         return [...this.todos]; //clono l'array così lo restituisce cambiato
     }
 
     orderTodosByPriority(todos: Todos[]): Todos[] {
         const newArray = [...todos];
 
-        newArray.sort((todo1: Todos, todo2: Todos) => {
-            let priority1 = todo1.priority;
-            if(todo1.isDone){
-                priority1 = -1
-            }
-            let priority2 = todo2.priority;
-            if(todo2.isDone){ //typo qui, ma non era quello il problems
-                priority2= -1
-            }
-			console.log(`Comparing ${priority1} and ${priority2}`);
-            return priority2 - priority1;
-        })
+        newArray.sort(this.compareTodosByPriority)
 
         return newArray;
+    }
+
+    compareTodosByPriority(todo1: Todos, todo2: Todos) {
+        let priority1 = todo1.priority;
+        if(todo1.isDone){
+            priority1 = -1
+        }
+        let priority2 = todo2.priority;
+        if(todo2.isDone){ //typo qui, ma non era quello il problems
+            priority2= -1
+        }
+        return priority2 - priority1;
     }
 
     orderTodosByTermination(todos: Todos[]): Todos[] {
@@ -71,11 +70,15 @@ export default class TodoService {
         newArray.sort((todo1: Todos, todo2: Todos) => {
             let term1 = todo1.terminationDate;
             if (!term1) {
-                term1 = 0
+                term1 = Infinity
             }
             let term2 = todo2.terminationDate;
             if (!term2) {
-                term2 = 0
+                term2 = Infinity
+            }
+
+            if (term1 === term2) {
+                return this.compareTodosByPriority(todo1, todo2)
             }
 
             return term1 - term2;
